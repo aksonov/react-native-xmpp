@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99de75f0-2627-4298-98e0-61726b42b8b1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RNXMPP/XMPPFramework.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RNXMPP.xcodeproj/project.xcworkspace/xcuserdata/aksonov.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/RNXMPP.xcodeproj/project.xcworkspace/xcuserdata/aksonov.xcuserdatad/UserInterfaceState.xcuserstate" />
     </list>
     <ignored path="react-native-xmpp.iws" />
     <ignored path=".idea/workspace.xml" />

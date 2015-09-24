@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "RCTBridgeModule.h"
+#import "RNXMPPService.h"
 
-@interface RNXMPP : NSObject <RCTBridgeModule>
+@interface RNXMPP : NSObject<RCTBridgeModule, RNXMPPServiceDelegate>
+
 @end

@@ -1,6 +1,6 @@
 {
   "name": "react-native-xmpp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "XMPP Library for React Native",
   "main": "index.js",
   "scripts": {
@@ -15,10 +15,18 @@
     "react-native",
     "xmppframework"
   ],
-  "author": "Pavlo Aksonov",
+  "author": {
+    "name": "Pavlo Aksonov"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aksonov/react-native-xmpp/issues"
   },
-  "homepage": "https://github.com/aksonov/react-native-xmpp#readme"
+  "homepage": "https://github.com/aksonov/react-native-xmpp#readme",
+  "readme": "# react-native-xmpp\nXMPP library for React Native\n",
+  "readmeFilename": "README.md",
+  "gitHead": "90d97bb04536db9341c85e77c1dfb972e450e424",
+  "_id": "react-native-xmpp@0.0.1",
+  "_shasum": "47358d4c13f7041162ef845ab297ab6e412ce5fa",
+  "_from": "react-native-xmpp@*"
 }

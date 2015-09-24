@@ -8,7 +8,46 @@
 
 /* Begin PBXBuildFile section */
 		878C03EE1BB31C440079CFC2 /* RNXMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = 878C03ED1BB31C440079CFC2 /* RNXMPP.m */; settings = {ASSET_TAGS = (); }; };
+		878C04981BB40C520079CFC2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 878C04971BB40C520079CFC2 /* CFNetwork.framework */; };
+		878C049B1BB40CAF0079CFC2 /* RNXMPPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 878C049A1BB40CAF0079CFC2 /* RNXMPPService.m */; settings = {ASSET_TAGS = (); }; };
+		878C04CC1BB41B200079CFC2 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 878C04CB1BB41B200079CFC2 /* libidn.a */; };
+		878C04D11BB41D780079CFC2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 878C04D01BB41D780079CFC2 /* CoreData.framework */; };
+		878C05311BB42D840079CFC2 /* libPods-RNXMPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 878C052E1BB42D740079CFC2 /* libPods-RNXMPP.a */; };
+		878C05341BB42DA20079CFC2 /* libCocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 878C052C1BB42D740079CFC2 /* libCocoaLumberjack.a */; };
+		878C05351BB42DA50079CFC2 /* libCocoaAsyncSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 878C052A1BB42D740079CFC2 /* libCocoaAsyncSocket.a */; };
+		878C05361BB42DAD0079CFC2 /* libXMPPFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 878C05301BB42D740079CFC2 /* libXMPPFramework.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		878C05291BB42D740079CFC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 878C05221BB42D740079CFC2 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC7FBFAD8E68C5E2832A6E75D0B78D69;
+			remoteInfo = CocoaAsyncSocket;
+		};
+		878C052B1BB42D740079CFC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 878C05221BB42D740079CFC2 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 76F18CD0AFBD79E2355A2852C6A685FB;
+			remoteInfo = CocoaLumberjack;
+		};
+		878C052D1BB42D740079CFC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 878C05221BB42D740079CFC2 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B13AF61E3F0435C6775A9BAC92793B5;
+			remoteInfo = "Pods-RNXMPP";
+		};
+		878C052F1BB42D740079CFC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 878C05221BB42D740079CFC2 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D348E1E3F407814C0ACBE8D0B85E7429;
+			remoteInfo = XMPPFramework;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		873769931B7CD6E900F7C3C2 /* CopyFiles */ = {
@@ -23,10 +62,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		63B098754548A430A1552F0D /* Pods-RNXMPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNXMPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-RNXMPP/Pods-RNXMPP.release.xcconfig"; sourceTree = "<group>"; };
 		873769951B7CD6E900F7C3C2 /* libRNXMPP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNXMPP.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		878C03EB1BB31B540079CFC2 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		878C03EC1BB31C440079CFC2 /* RNXMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNXMPP.h; sourceTree = "<group>"; };
 		878C03ED1BB31C440079CFC2 /* RNXMPP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNXMPP.m; sourceTree = "<group>"; };
+		878C04971BB40C520079CFC2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		878C04991BB40CAF0079CFC2 /* RNXMPPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNXMPPService.h; sourceTree = "<group>"; };
+		878C049A1BB40CAF0079CFC2 /* RNXMPPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNXMPPService.m; sourceTree = "<group>"; };
+		878C04CB1BB41B200079CFC2 /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libidn.a; path = Pods/XMPPFramework/Vendor/libidn/libidn.a; sourceTree = "<group>"; };
+		878C04CD1BB41B590079CFC2 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		878C04D01BB41D780079CFC2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		878C04EF1BB424540079CFC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		878C05221BB42D740079CFC2 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		8B6151F1F58966BEC309E888 /* Pods-RNXMPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNXMPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNXMPP/Pods-RNXMPP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,18 +82,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				878C05361BB42DAD0079CFC2 /* libXMPPFramework.a in Frameworks */,
+				878C05351BB42DA50079CFC2 /* libCocoaAsyncSocket.a in Frameworks */,
+				878C05341BB42DA20079CFC2 /* libCocoaLumberjack.a in Frameworks */,
+				878C05311BB42D840079CFC2 /* libPods-RNXMPP.a in Frameworks */,
+				878C04D11BB41D780079CFC2 /* CoreData.framework in Frameworks */,
+				878C04CC1BB41B200079CFC2 /* libidn.a in Frameworks */,
+				878C04981BB40C520079CFC2 /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		344D1DEC2378CFD871BA8912 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B6151F1F58966BEC309E888 /* Pods-RNXMPP.debug.xcconfig */,
+				63B098754548A430A1552F0D /* Pods-RNXMPP.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8737698C1B7CD6E900F7C3C2 = {
 			isa = PBXGroup;
 			children = (
+				878C05221BB42D740079CFC2 /* Pods.xcodeproj */,
 				878C03D81BB319B40079CFC2 /* RNXMPP */,
+				878C04EE1BB424540079CFC2 /* RNXMPPResources */,
 				873769961B7CD6E900F7C3C2 /* Products */,
 				873769AF1B7CD88700F7C3C2 /* Frameworks */,
+				344D1DEC2378CFD871BA8912 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +127,10 @@
 		873769AF1B7CD88700F7C3C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				878C04D01BB41D780079CFC2 /* CoreData.framework */,
+				878C04CD1BB41B590079CFC2 /* libresolv.tbd */,
+				878C04CB1BB41B200079CFC2 /* libidn.a */,
+				878C04971BB40C520079CFC2 /* CFNetwork.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -67,11 +138,31 @@
 		878C03D81BB319B40079CFC2 /* RNXMPP */ = {
 			isa = PBXGroup;
 			children = (
-				878C03EB1BB31B540079CFC2 /* XMPPFramework.h */,
 				878C03EC1BB31C440079CFC2 /* RNXMPP.h */,
 				878C03ED1BB31C440079CFC2 /* RNXMPP.m */,
+				878C04991BB40CAF0079CFC2 /* RNXMPPService.h */,
+				878C049A1BB40CAF0079CFC2 /* RNXMPPService.m */,
 			);
 			path = RNXMPP;
+			sourceTree = "<group>";
+		};
+		878C04EE1BB424540079CFC2 /* RNXMPPResources */ = {
+			isa = PBXGroup;
+			children = (
+				878C04EF1BB424540079CFC2 /* Info.plist */,
+			);
+			path = RNXMPPResources;
+			sourceTree = "<group>";
+		};
+		878C05231BB42D740079CFC2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				878C052A1BB42D740079CFC2 /* libCocoaAsyncSocket.a */,
+				878C052C1BB42D740079CFC2 /* libCocoaLumberjack.a */,
+				878C052E1BB42D740079CFC2 /* libPods-RNXMPP.a */,
+				878C05301BB42D740079CFC2 /* libXMPPFramework.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -81,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 873769A91B7CD6E900F7C3C2 /* Build configuration list for PBXNativeTarget "RNXMPP" */;
 			buildPhases = (
+				160A9D9BEFDB6E0AB8E1B38D /* Check Pods Manifest.lock */,
 				873769911B7CD6E900F7C3C2 /* Sources */,
 				873769921B7CD6E900F7C3C2 /* Frameworks */,
 				873769931B7CD6E900F7C3C2 /* CopyFiles */,
+				AD0D8A5AE0DD6D268669B892 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -118,6 +211,12 @@
 			mainGroup = 8737698C1B7CD6E900F7C3C2;
 			productRefGroup = 873769961B7CD6E900F7C3C2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 878C05231BB42D740079CFC2 /* Products */;
+					ProjectRef = 878C05221BB42D740079CFC2 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				873769941B7CD6E900F7C3C2 /* RNXMPP */,
@@ -125,11 +224,76 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		878C052A1BB42D740079CFC2 /* libCocoaAsyncSocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaAsyncSocket.a;
+			remoteRef = 878C05291BB42D740079CFC2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		878C052C1BB42D740079CFC2 /* libCocoaLumberjack.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaLumberjack.a;
+			remoteRef = 878C052B1BB42D740079CFC2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		878C052E1BB42D740079CFC2 /* libPods-RNXMPP.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libPods-RNXMPP.a";
+			remoteRef = 878C052D1BB42D740079CFC2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		878C05301BB42D740079CFC2 /* libXMPPFramework.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libXMPPFramework.a;
+			remoteRef = 878C052F1BB42D740079CFC2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		160A9D9BEFDB6E0AB8E1B38D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AD0D8A5AE0DD6D268669B892 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RNXMPP/Pods-RNXMPP-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		873769911B7CD6E900F7C3C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				878C049B1BB40CAF0079CFC2 /* RNXMPPService.m in Sources */,
 				878C03EE1BB31C440079CFC2 /* RNXMPP.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,39 +381,61 @@
 		};
 		873769AA1B7CD6E900F7C3C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B6151F1F58966BEC309E888 /* Pods-RNXMPP.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.1.sdk/System/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+					"$(PODS_ROOT)/XMPPFramework/module",
+					"$(SDKROOT)/usr/include/libresolv",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaLumberjack\"",
+					"\"${PODS_ROOT}/Headers/Public/XMPPFramework\"",
 					"$(SRCROOT)/../react-native/React/**",
-					"$(SRCROOT)/../../React/**",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
+				);
 				PRODUCT_NAME = RNXMPP;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		873769AB1B7CD6E900F7C3C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63B098754548A430A1552F0D /* Pods-RNXMPP.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.1.sdk/System/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+					"$(PODS_ROOT)/XMPPFramework/module",
+					"$(SDKROOT)/usr/include/libresolv",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaLumberjack\"",
+					"\"${PODS_ROOT}/Headers/Public/XMPPFramework\"",
 					"$(SRCROOT)/../react-native/React/**",
-					"$(SRCROOT)/../../React/**",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
+				);
 				PRODUCT_NAME = RNXMPP;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
