@@ -412,7 +412,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self.delegate onError:error];
+    [self.delegate onError:[NSError errorWithDomain:@"chat" code:1 userInfo:@{@"localizedDescription": [error stringValue]}]];
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error

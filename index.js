@@ -63,7 +63,12 @@ class XMPP {
     }
 
     message(text, user){
+        console.log("Message:"+text+" being sent to user: "+user);
         React.NativeModules.RNXMPP.message(text, user);
+    }
+
+    disconnect(){
+        React.NativeModules.RNXMPP.disconnect();
     }
 }
 

@@ -98,4 +98,9 @@ RCT_EXPORT_METHOD(message:(NSString *)text to:(NSString *)to){
     [[RNXMPPService sharedInstance] sendMessage:text to:to];
 }
 
+RCT_EXPORT_METHOD(disconnect){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] disconnect];
+}
+
 @end
