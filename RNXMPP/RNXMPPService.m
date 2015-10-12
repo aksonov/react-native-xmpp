@@ -400,7 +400,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self.delegate onMessage:message];
+    if (message.isErrorMessage){
+        [self.delegate onError:[message errorMessage]];
+    } else {
+        [self.delegate onMessage:message];
+    }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
@@ -412,17 +416,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self.delegate onError:[NSError errorWithDomain:@"chat" code:1 userInfo:@{@"localizedDescription": [error stringValue]}]];
+    [self.delegate onError:[NSError errorWithDomain:@"xmpp" code:1 userInfo:@{ NSLocalizedDescriptionKey: [error stringValue]}]];
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    if (!isXmppConnected)
-    {
-        DDLogError(@"Unable to connect to server. Check xmppStream.hostName");
-    }
+    isXmppConnected = NO;
     
     [self.delegate onDisconnect:error];
     
@@ -433,6 +433,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(void)sendMessage:(NSString *)text to:(NSString *)to {
+    if (!isXmppConnected){
+        [self.delegate onError:[NSError errorWithDomain:@"xmpp" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Server is not connected, please reconnect"}]];
+        return;
+    }
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     [body setStringValue:text];

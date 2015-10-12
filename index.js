@@ -37,6 +37,7 @@ class XMPP {
     onDisconnected(error){
         console.log("Disconnected, error"+error);
         this.isConnected = false;
+        this.isLogged = false;
     }
 
     onError(text){
@@ -68,7 +69,9 @@ class XMPP {
     }
 
     disconnect(){
-        React.NativeModules.RNXMPP.disconnect();
+        if (this.isConnected){
+            React.NativeModules.RNXMPP.disconnect();
+        }
     }
 }
 

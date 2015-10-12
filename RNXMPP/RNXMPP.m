@@ -24,7 +24,8 @@ RCT_EXPORT_MODULE();
 
 
 -(void)onError:(NSError *)error {
-    [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPError" body:[error localizedDescription]];
+    NSString *message = [error localizedDescription];
+    [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPError" body:message];
 }
 
 -(void)onLoginError:(NSError *)error {
