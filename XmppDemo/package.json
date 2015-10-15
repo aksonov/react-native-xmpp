@@ -1,0 +1,16 @@
+{
+  "name": "XmppDemo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "react-native": "^0.12.0",
+    "react-native-button": "^1.2.1",
+    "react-native-invertible-scroll-view": "^0.1.2",
+    "react-native-navbar": "^0.8.2",
+    "react-native-router-flux": "^0.3.3",
+    "react-native-xmpp": "^0.0.4"
+  }
+}
