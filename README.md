@@ -3,6 +3,12 @@ XMPP library for React Native
 
 Simple interface for native XMPP communication (only iOS supported at this moment) using iOS XMPPFramework
 
+## Demo
+XmppDemo uses Flux approach (check its XmppStore) to communicate with sample XMPP server, where 4 accounts were registered.
+![demo-3](https://cloud.githubusercontent.com/assets/1321329/10537760/406affa6-73f4-11e5-986f-81a78adf129e.gif)
+
+
+## Example
 
 ```
 var XMPP = require('react-native-xmpp');
