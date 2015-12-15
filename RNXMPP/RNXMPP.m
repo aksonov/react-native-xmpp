@@ -103,6 +103,16 @@ RCT_EXPORT_METHOD(message:(NSString *)text to:(NSString *)to){
     [[RNXMPPService sharedInstance] sendMessage:text to:to];
 }
 
+RCT_EXPORT_METHOD(presence:(NSString *)to type:(NSString *)type){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] sendPresence:to type:type];
+}
+
+RCT_EXPORT_METHOD(removeRoster:(NSString *)to){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] removeRoster:to];
+}
+
 RCT_EXPORT_METHOD(disconnect){
     [RNXMPPService sharedInstance].delegate = self;
     [[RNXMPPService sharedInstance] disconnect];

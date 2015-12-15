@@ -481,6 +481,17 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream sendElement:msg];
 }
 
+-(void)sendPresence:(NSString *)to type:(NSString *)type {
+    if (!isXmppConnected){
+        [self.delegate onError:[NSError errorWithDomain:@"xmpp" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Server is not connected, please reconnect"}]];
+        return;
+    }
+    XMPPPresence *presence = [XMPPPresence presenceWithType:type to:[XMPPJID jidWithString:to]];
+    [xmppStream sendElement:presence];
+}
 
+-(void)removeRoster:(NSString *)to {
+    [xmppRoster removeUser:[XMPPJID jidWithString:to]];
+}
 
 @end

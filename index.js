@@ -69,6 +69,14 @@ class XMPP {
         React.NativeModules.RNXMPP.message(text, user);
     }
 
+    presence(to, type){
+        React.NativeModules.RNXMPP.presence(to, type);
+    }
+
+    removeFromRoster(to){
+        React.NativeModules.RNXMPP.removeRoster(to);
+    }
+
     disconnect(){
         if (this.isConnected){
             React.NativeModules.RNXMPP.disconnect();
