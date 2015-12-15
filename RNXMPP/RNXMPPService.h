@@ -14,6 +14,8 @@
 #import "NSDate+XMPPDateTimeProfiles.h"
 #import "XMPPMUC.h"
 #import "XMPPRoom.h"
+#import "XMPPRoster.h"
+#import "XMPPRosterMemoryStorage.h"
 
 @protocol RNXMPPServiceDelegate <NSObject>
 
@@ -21,6 +23,7 @@
 -(void)onMessage:(XMPPMessage *)message;
 -(void)onPresence:(XMPPPresence *)presence;
 -(void)onIQ:(XMPPIQ *)iq;
+-(void)onRosterReceived:(NSArray *)list;
 -(void)onDisconnect:(NSError *)error;
 -(void)onConnnect;
 -(void)onLogin;
@@ -31,6 +34,8 @@
 @interface RNXMPPService : NSObject
 {
     XMPPStream *xmppStream;
+    XMPPRoster *xmppRoster;
+    XMPPRosterMemoryStorage *xmppRosterStorage;
     XMPPReconnect *xmppReconnect;
     XMPPMUC *xmppMUC;
     NSString *password;

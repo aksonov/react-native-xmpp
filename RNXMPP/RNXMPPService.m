@@ -4,7 +4,7 @@
 #import "XMPP.h"
 #import "XMPPLogging.h"
 #import "XMPPReconnect.h"
-
+#import "XMPPUser.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
 
@@ -103,13 +103,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // You can do it however you like! It's your application.
     // But you do need to provide the roster with some storage facility.
     
-//    xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
-    //	xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
+    xmppRosterStorage = [[XMPPRosterMemoryStorage alloc] init];
     
-//    xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
+    xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
     
-//    xmppRoster.autoFetchRoster = YES;
-//    xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
+    xmppRoster.autoFetchRoster = YES;
+    xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
     
     // Setup vCard support
     //
@@ -148,17 +147,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     // Activate xmpp modules
     
-//    [xmppReconnect         activate:xmppStream];
-//    [xmppRoster            activate:xmppStream];
+    [xmppReconnect         activate:xmppStream];
+    [xmppRoster            activate:xmppStream];
+    [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
 //    [xmppvCardTempModule   activate:xmppStream];
 //    [xmppvCardAvatarModule activate:xmppStream];
 //    [xmppCapabilities      activate:xmppStream];
 //
     
     
-    xmppMUC = [[XMPPMUC alloc] init];
-    [xmppMUC activate:xmppStream];
-    [xmppMUC addDelegate:self delegateQueue:dispatch_get_main_queue()];
+//    xmppMUC = [[XMPPMUC alloc] init];
+//    [xmppMUC activate:xmppStream];
+//    [xmppMUC addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     // Add ourself as a delegate to anything we may be interested in
     
@@ -396,6 +396,39 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     return NO;
 }
+
+- (void)xmppRosterDidPopulate:(XMPPRosterMemoryStorage *)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSArray *users = [sender unsortedUsers];
+    NSMutableArray *list = [NSMutableArray array];
+    for (XMPPUserMemoryStorageObject *user in users){
+        [list addObject:@{@"username": [[user jid] user], @"subscription": [user subscription]}];
+    }
+    [self.delegate onRosterReceived:list];
+    
+}
+
+- (void)xmppRoster:(XMPPRosterMemoryStorage *)sender
+    didAddResource:(XMPPResourceMemoryStorageObject *)resource
+          withUser:(XMPPUserMemoryStorageObject *)user {
+    
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+}
+
+- (void)xmppRoster:(XMPPRosterMemoryStorage *)sender
+    didRemoveResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
+    
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+}
+
+- (void)xmppRoster:(XMPPRosterMemoryStorage *)sender
+    didUpdateResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
+    
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+}
+
+
+
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {

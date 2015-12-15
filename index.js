@@ -10,7 +10,8 @@ var map = {
     'disconnect': 'RNXMPPDisconnect',
     'error': 'RNXMPPError',
     'loginError': 'RNXMPPLoginError',
-    'login': 'RNXMPPLogin'
+    'login': 'RNXMPPLogin',
+    'roster': 'RNXMPPRoster'
 }
 
 class XMPP {

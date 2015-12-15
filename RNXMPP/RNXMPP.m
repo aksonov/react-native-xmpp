@@ -66,6 +66,10 @@ RCT_EXPORT_MODULE();
 
 }
 
+-(void)onRosterReceived:(NSArray *)list {
+    [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPRoster" body:list];
+}
+
 -(void)onIQ:(XMPPIQ *)iq {
     NSDictionary *res = [self contentOf:iq];
     [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPIQ" body:res];
