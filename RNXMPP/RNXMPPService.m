@@ -11,8 +11,8 @@
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
-//static const int ddLogLevel = XMPP_LOG_FLAG_SEND_RECV;//LOG_LEVEL_VERBOSE;
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = XMPP_LOG_FLAG_SEND_RECV;//LOG_LEVEL_VERBOSE;
+//static const int ddLogLevel = LOG_LEVEL_INFO;
 #else
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
@@ -252,11 +252,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     password = myPassword;
     
     NSError *error = nil;
-    if (![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
+    if (![xmppStream connectWithTimeout:30 error:&error])
     {
         DDLogError(@"Error connecting: %@", error);
         if (self.delegate){
-            [self.delegate onError:error];
+            [self.delegate onLoginError:error];
         }
         
         return NO;

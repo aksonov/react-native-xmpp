@@ -86,6 +86,9 @@ RCT_EXPORT_MODULE();
 
 -(void)onDisconnect:(NSError *)error {
     [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPDisconnect" body:[error localizedDescription]];
+    if ([error localizedDescription]){
+        [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPLoginError" body:[error localizedDescription]];
+    }
 }
 
 -(void)onLogin {
