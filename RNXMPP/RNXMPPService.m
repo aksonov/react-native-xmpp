@@ -7,17 +7,18 @@
 #import "XMPPUser.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
-
 #import <CFNetwork/CFNetwork.h>
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+//static const int ddLogLevel = XMPP_LOG_FLAG_SEND_RECV;//LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 #else
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
 
-@interface RNXMPPService()
+@interface RNXMPPService(){
+}
 
 - (void)setupStream;
 - (void)teardownStream;
@@ -67,6 +68,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // The XMPPStream is the base class for all activity.
     // Everything else plugs into the xmppStream, such as modules/extensions and delegates.
     
+    // We're restarting our negotiation, so we need to reset the parser.
     xmppStream = [[XMPPStream alloc] init];
     
 #if !TARGET_IPHONE_SIMULATOR
@@ -107,7 +109,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
     
-    xmppRoster.autoFetchRoster = YES;
+    xmppRoster.autoFetchRoster = NO;
     xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
     
     // Setup vCard support
@@ -490,8 +492,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream sendElement:presence];
 }
 
+-(void)sendStanza:(NSString *)stanza {
+    NSData *data = [stanza dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    DDXMLDocument *doc = [[DDXMLDocument alloc] initWithData:data options:0 error:&error];
+    DDXMLElement *el = [doc rootElement];
+    [xmppStream sendElement:el];
+}
+
 -(void)removeRoster:(NSString *)to {
     [xmppRoster removeUser:[XMPPJID jidWithString:to]];
+}
+
+-(void)fetchRoster {
+    [xmppRoster fetchRoster];
 }
 
 @end

@@ -118,4 +118,15 @@ RCT_EXPORT_METHOD(disconnect){
     [[RNXMPPService sharedInstance] disconnect];
 }
 
+RCT_EXPORT_METHOD(fetchRoster){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] fetchRoster];
+}
+
+RCT_EXPORT_METHOD(sendStanza:(NSString *)stanza){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] sendStanza:stanza];
+}
+
+
 @end

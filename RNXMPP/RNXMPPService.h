@@ -53,6 +53,8 @@
 - (void)sendMessage:(NSString *)text to:(NSString *)username;
 - (void)sendPresence:(NSString *)to type:(NSString *)type;
 - (void)removeRoster:(NSString *)to;
+-(void)fetchRoster;
+-(void)sendStanza:(NSString *)stanza;
 
 @end
 

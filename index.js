@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react-native');
-var {NativeAppEventEmitter} = React;
+var {NativeAppEventEmitter, NativeModules} = React;
+var RNXMPP = NativeModules.RNXMPP;
 
 var map = {
     'message' : 'RNXMPPMessage',
@@ -67,6 +68,14 @@ class XMPP {
     message(text, user){
         console.log("Message:"+text+" being sent to user: "+user);
         React.NativeModules.RNXMPP.message(text, user);
+    }
+
+    sendStanza(stanza){
+        RNXMPP.sendStanza(stanza);
+    }
+
+    fetchRoster(){
+        RNXMPP.fetchRoster();
     }
 
     presence(to, type){
