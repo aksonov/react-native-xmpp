@@ -2,7 +2,7 @@
 platform :ios, '7.0'
 
 target 'RNXMPP' do
-pod 'XMPPFramework'
+pod 'XMPPFramework', '3.6.5'
 end
 
 post_install do |installer|
