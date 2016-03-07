@@ -9,7 +9,21 @@
 #import "RNXMPP.h"
 #import "RCTBridge.h"
 #import "RCTEventDispatcher.h"
+#import "RCTConvert.h"
+#import "RNXMPPConstants.h"
 
+const NSString *PLAIN_AUTH = @"PLAIN";
+const NSString *SCRAMSHA1_AUTH = @"SCRAMSHA1";
+const NSString *DigestMD5_AUTH = @"DigestMD5";
+
+@implementation RCTConvert (AuthMethod)
+RCT_ENUM_CONVERTER(AuthMethod, (@{ PLAIN_AUTH : @(Plain),
+                                             SCRAMSHA1_AUTH : @(SCRAM),
+                                             DigestMD5_AUTH : @(MD5)}),
+                                          SCRAM, integerValue)
+@end
+
+                   
 @implementation RNXMPP {
     RCTResponseSenderBlock onError;
     RCTResponseSenderBlock onConnect;
@@ -96,9 +110,9 @@ RCT_EXPORT_MODULE();
 }
 
 
-RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password){
+RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password auth:(AuthMethod) auth){
     [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] connect:jid withPassword:password];
+    [[RNXMPPService sharedInstance] connect:jid withPassword:password auth:auth];
 }
 
 RCT_EXPORT_METHOD(message:(NSString *)text to:(NSString *)to){
@@ -130,6 +144,14 @@ RCT_EXPORT_METHOD(sendStanza:(NSString *)stanza){
     [RNXMPPService sharedInstance].delegate = self;
     [[RNXMPPService sharedInstance] sendStanza:stanza];
 }
+
+- (NSDictionary *)constantsToExport
+{
+    return @{ PLAIN_AUTH : @(Plain),
+              SCRAMSHA1_AUTH: @(SCRAM),
+              DigestMD5_AUTH: @(MD5)
+              };
+};
 
 
 @end

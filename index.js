@@ -16,6 +16,10 @@ var map = {
 }
 
 class XMPP {
+    PLAIN = RNXMPP.PLAIN;
+    SCRAM = RNXMPP.SCRAMSHA1;
+    MD5 = RNXMPP.DigestMD5;
+
     constructor(){
         this.isConnected = false;
         this.isLogged = false;
@@ -61,8 +65,8 @@ class XMPP {
 
     }
 
-    connect(username, password){
-        React.NativeModules.RNXMPP.connect(username, password);
+    connect(username, password, auth = RNXMPP.SCRAMSHA1){
+        React.NativeModules.RNXMPP.connect(username, password, auth);
     }
 
     message(text, user){

@@ -16,6 +16,7 @@
 #import "XMPPRoom.h"
 #import "XMPPRoster.h"
 #import "XMPPRosterMemoryStorage.h"
+#import "RNXMPPConstants.h"
 
 @protocol RNXMPPServiceDelegate <NSObject>
 
@@ -39,6 +40,7 @@
     XMPPReconnect *xmppReconnect;
     XMPPMUC *xmppMUC;
     NSString *password;
+    AuthMethod authMethod;
     BOOL customCertEvaluation;
     BOOL isXmppConnected;
 }
@@ -48,7 +50,7 @@
 @property (nonatomic, weak) id<RNXMPPServiceDelegate> delegate;
 
 +(RNXMPPService *) sharedInstance;
-- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword;
+- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth;
 - (void)disconnect;
 - (void)sendMessage:(NSString *)text to:(NSString *)username;
 - (void)sendPresence:(NSString *)to type:(NSString *)type;

@@ -238,7 +238,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark Connect/disconnect
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword
+- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth
 {
     if (![xmppStream isDisconnected]) {
         [self disconnect];
@@ -250,6 +250,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [xmppStream setMyJID:[XMPPJID jidWithString:myJID]];
     password = myPassword;
+    authMethod = auth;
     
     NSError *error = nil;
     if (![xmppStream connectWithTimeout:30 error:&error])
@@ -370,7 +371,31 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSError *error = nil;
     [self.delegate onConnnect];
     
-    if (![[self xmppStream] authenticateWithPassword:password error:&error])
+    id <XMPPSASLAuthentication> someAuth = nil;
+    
+    if (authMethod == SCRAM && [[self xmppStream] supportsSCRAMSHA1Authentication])
+    {
+        someAuth = [[XMPPSCRAMSHA1Authentication alloc] initWithStream:[self xmppStream] password:password];
+    }
+    else if (authMethod == MD5 && [[self xmppStream] supportsDigestMD5Authentication])
+    {
+        someAuth = [[XMPPDigestMD5Authentication alloc] initWithStream:[self xmppStream] password:password];
+    }
+    else if ([[self xmppStream] supportsPlainAuthentication])
+    {
+        someAuth = [[XMPPPlainAuthentication alloc] initWithStream:[self xmppStream] password:password];
+    }
+    else
+    {
+        NSString *errMsg = @"No suitable authentication method found";
+        NSDictionary *info = @{NSLocalizedDescriptionKey : errMsg};
+        
+        error = [NSError errorWithDomain:XMPPStreamErrorDomain code:XMPPStreamUnsupportedAction userInfo:info];
+        DDLogError(@"Error authenticating: %@", error);
+        [self.delegate onLoginError:error];
+        return;
+    }
+    if (![[self xmppStream] authenticate:someAuth error:&error])
     {
         DDLogError(@"Error authenticating: %@", error);
         [self.delegate onLoginError:error];
