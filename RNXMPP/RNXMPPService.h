@@ -26,8 +26,8 @@
 -(void)onIQ:(XMPPIQ *)iq;
 -(void)onRosterReceived:(NSArray *)list;
 -(void)onDisconnect:(NSError *)error;
--(void)onConnnect;
--(void)onLogin;
+-(void)onConnnect:(NSString *)username password:(NSString *)password;
+-(void)onLogin:(NSString *)username password:(NSString *)password;
 -(void)onLoginError:(NSError *)error;
 
 @end
@@ -39,6 +39,7 @@
     XMPPRosterMemoryStorage *xmppRosterStorage;
     XMPPReconnect *xmppReconnect;
     XMPPMUC *xmppMUC;
+    NSString *username;
     NSString *password;
     AuthMethod authMethod;
     BOOL customCertEvaluation;

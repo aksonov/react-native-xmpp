@@ -249,6 +249,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
     [xmppStream setMyJID:[XMPPJID jidWithString:myJID]];
+    username = myJID;
     password = myPassword;
     authMethod = auth;
     
@@ -369,7 +370,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     isXmppConnected = YES;
     
     NSError *error = nil;
-    [self.delegate onConnnect];
+    [self.delegate onConnnect:username password:password];
     
     id <XMPPSASLAuthentication> someAuth = nil;
     
@@ -407,7 +408,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     [self goOnline];
-    [self.delegate onLogin];
+    [self.delegate onLogin:username password:password];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error

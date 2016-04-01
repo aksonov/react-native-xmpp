@@ -94,8 +94,8 @@ RCT_EXPORT_MODULE();
     [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPPresence" body:res];
 }
 
--(void)onConnnect {
-    [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPConnect" body:@{}];
+-(void)onConnnect:(NSString *)username password:(NSString *)password {
+    [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPConnect" body:@{@"username":username, @"password":password}];
 }
 
 -(void)onDisconnect:(NSError *)error {
@@ -105,8 +105,8 @@ RCT_EXPORT_MODULE();
     }
 }
 
--(void)onLogin {
-    [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPLogin" body:@{}];
+-(void)onLogin:(NSString *)username password:(NSString *)password {
+    [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPLogin" body:@{@"username":username, @"password":password}];
 }
 
 
