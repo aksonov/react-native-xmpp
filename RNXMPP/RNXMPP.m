@@ -23,7 +23,7 @@ RCT_ENUM_CONVERTER(AuthMethod, (@{ PLAIN_AUTH : @(Plain),
                                           SCRAM, integerValue)
 @end
 
-                   
+
 @implementation RNXMPP {
     RCTResponseSenderBlock onError;
     RCTResponseSenderBlock onConnect;
@@ -143,6 +143,18 @@ RCT_EXPORT_METHOD(fetchRoster){
 RCT_EXPORT_METHOD(sendStanza:(NSString *)stanza){
     [RNXMPPService sharedInstance].delegate = self;
     [[RNXMPPService sharedInstance] sendStanza:stanza];
+}
+
+RCT_EXPORT_METHOD(joinRoom:(NSString *)roomJID nickName:(NSString *)nickname)
+{
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] joinRoom:roomJID nickName:nickname];
+}
+
+RCT_EXPORT_METHOD(sendRoomMessage:(NSString *)message)
+{
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] sendRoomMessage:message];
 }
 
 - (NSDictionary *)constantsToExport
