@@ -37,8 +37,5 @@ XMPP.disconnect();
 
 ## Getting started
 1. `npm install react-native-xmpp --save`
-2. `cd node_modules/react-native-xmpp`
-3. `pod install --no-integrate`
-4. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-5. add `./node_modules/react-native-xmpp/RNXMPP.xcodeproj`
-6. In the XCode project navigator, select your project, select the `Build Phases` tab and in the `Link Binary With Libraries` section add **libRNXMPP.a**, ***libresolv** and **libxml2**
+2. `rnpm link react-native-xmpp`
+3. In the XCode project navigator, select your project, select the `Build Phases` tab and in the `Link Binary With Libraries` section add **libRNXMPP.a**, ***libresolv** and **libxml2**
