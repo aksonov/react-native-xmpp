@@ -57,12 +57,11 @@ class XMPP {
 
     on(type, callback){
         if (map[type]){
-            NativeAppEventEmitter.addListener(
+            return NativeAppEventEmitter.addListener(
                 map[type],callback);
         } else {
-            console.error("No registered type: "+type);
+            throw "No registered type: " + type;
         }
-
     }
 
     connect(username, password, auth = RNXMPP.SCRAMSHA1){
