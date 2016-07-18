@@ -29,6 +29,12 @@ XMPP.connect(MYJID, MYPASSWORD);
 // send message
 XMPP.message('Hello world!', TOJID);
 
+// join room
+XMPP.joinRoom('ROMJID', 'nickname');
+
+// send room's message
+XMPP.sendRoomMessage('Hello world!!!');
+
 // disconnect
 XMPP.disconnect();
 
