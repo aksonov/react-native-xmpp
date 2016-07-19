@@ -238,7 +238,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark Connect/disconnect
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth
+- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth hostname:(NSString *)hostname port:(int)port
 {
     if (![xmppStream isDisconnected]) {
         [self disconnect];
@@ -252,6 +252,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     username = myJID;
     password = myPassword;
     authMethod = auth;
+    
+    if(hostname){
+        xmppStream.hostName = hostname;
+    }
+    if(port){
+        xmppStream.hostPort = port;
+    }
 
     NSError *error = nil;
     if (![xmppStream connectWithTimeout:30 error:&error])

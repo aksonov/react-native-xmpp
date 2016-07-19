@@ -51,7 +51,7 @@
 @property (nonatomic, weak) id<RNXMPPServiceDelegate> delegate;
 
 +(RNXMPPService *) sharedInstance;
-- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth;
+- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth hostname:(NSString *)hostname port:(int)port;
 - (void)disconnect;
 - (void)sendMessage:(NSString *)text to:(NSString *)username;
 - (void)sendPresence:(NSString *)to type:(NSString *)type;
