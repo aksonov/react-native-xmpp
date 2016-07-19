@@ -31,8 +31,8 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements ae.telet
 
     @Override
     @ReactMethod
-    public void connect(String jid, String password, String authMethod){
-        this.xmppService.connect(jid, password, authMethod);
+    public void connect(String jid, String password, String authMethod, String hostname, Integer port){
+        this.xmppService.connect(jid, password, authMethod, hostname, port);
     }
 
     @Override

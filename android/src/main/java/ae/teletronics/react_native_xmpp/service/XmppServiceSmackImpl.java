@@ -47,13 +47,21 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
 
     @Override
-    public void connect(String jid, String password, String authMethod) {
+    public void connect(String jid, String password, String authMethod, String hostname, Integer port) {
         XMPPTCPConnectionConfiguration.Builder confBuilder = XMPPTCPConnectionConfiguration.builder()
                 .setServiceName(jid.split("@")[1])
                 .setUsernameAndPassword(jid, password)
                 .setConnectTimeout(3000)
                 .setDebuggerEnabled(true)
                 .setSecurityMode(ConnectionConfiguration.SecurityMode.required);
+
+        if (hostname != null){
+            confBuilder.setHost(hostname);
+        }
+        if (port != null){
+            confBuilder.setPort(port);
+        }
+
         XMPPTCPConnectionConfiguration connectionConfiguration = confBuilder.build();
         connection = new XMPPTCPConnection(connectionConfiguration);
 

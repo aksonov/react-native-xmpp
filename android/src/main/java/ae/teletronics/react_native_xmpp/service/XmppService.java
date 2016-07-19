@@ -9,7 +9,7 @@ import com.facebook.react.bridge.ReactMethod;
 
 public interface XmppService {
     @ReactMethod
-    void connect(String jid, String password, String authMethod);
+    void connect(String jid, String password, String authMethod, String hostname, Integer port);
 
     @ReactMethod
     void message(String text, String to);
