@@ -151,20 +151,6 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
     }
 
     @Override
-    public void sendRoomMessage(String message) {
-        throw new UnsupportedOperationException("Can not send room message in react-native-xmpp android implementation.");
-    }
-
-    @Override
-    public void joinRoom(String roomId, String nickName) {
-        try {
-            MultiUserChatManager.getInstanceFor(connection).getMultiUserChat(roomId).join(nickName);
-        } catch (SmackException.NoResponseException | SmackException.NotConnectedException | XMPPException.XMPPErrorException e) {
-            logger.log(Level.WARNING, "Could not join room", e);
-        }
-    }
-
-    @Override
     public void chatCreated(Chat chat, boolean createdLocally) {
         chat.addMessageListener(this);
     }

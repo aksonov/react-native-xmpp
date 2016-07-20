@@ -114,7 +114,7 @@ RCT_EXPORT_METHOD(trustHosts:(NSArray *)hosts){
     [[RNXMPPService sharedInstance] trustHosts:hosts];
 }
 
-RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password auth:(AuthMethod) auth hostname:(NSString *)hostname port(int)port){
+RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password auth:(AuthMethod) auth hostname:(NSString *)hostname port:(int)port){
     [RNXMPPService sharedInstance].delegate = self;
     [[RNXMPPService sharedInstance] connect:jid withPassword:password auth:auth hostname:hostname port:port];
 }
@@ -147,18 +147,6 @@ RCT_EXPORT_METHOD(fetchRoster){
 RCT_EXPORT_METHOD(sendStanza:(NSString *)stanza){
     [RNXMPPService sharedInstance].delegate = self;
     [[RNXMPPService sharedInstance] sendStanza:stanza];
-}
-
-RCT_EXPORT_METHOD(joinRoom:(NSString *)roomJID nickName:(NSString *)nickname)
-{
-    [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] joinRoom:roomJID nickName:nickname];
-}
-
-RCT_EXPORT_METHOD(sendRoomMessage:(NSString *)message)
-{
-    [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] sendRoomMessage:message];
 }
 
 - (NSDictionary *)constantsToExport

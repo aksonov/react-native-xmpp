@@ -554,22 +554,4 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppRoster fetchRoster];
 }
 
--(void)joinRoom:(NSString *)roomJID nickName:(NSString *)nickname{
-    XMPPJID *ROOM_JID = [XMPPJID jidWithString:roomJID];
-    XMPPRoomMemoryStorage *roomMemoryStorage = [[XMPPRoomMemoryStorage alloc] init];
-    xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:roomMemoryStorage jid:ROOM_JID];
-    [xmppRoom activate:xmppStream];
-    [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    [xmppRoom joinRoomUsingNickname:nickname history:nil];
-    NSLog(@"Join Room:%s",xmppRoom.isJoined? "true" : "false");
-}
-
-- (void)sendRoomMessage:(NSString *)message{
-    if (!isXmppConnected){
-        [self.delegate onError:[NSError errorWithDomain:@"xmpp" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Server is not connected, please reconnect"}]];
-        return;
-    }
-    [xmppRoom sendMessageWithBody:message];
-}
-
 @end
