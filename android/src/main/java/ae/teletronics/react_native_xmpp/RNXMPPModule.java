@@ -3,6 +3,7 @@ package ae.teletronics.react_native_xmpp;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 
 import java.util.logging.Logger;
 
@@ -27,6 +28,11 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements ae.telet
     @Override
     public String getName() {
         return MODULE_NAME;
+    }
+
+    @Override
+    public void trustHosts(ReadableArray trustedHosts) {
+        this.xmppService.trustHosts(trustedHosts);
     }
 
     @Override

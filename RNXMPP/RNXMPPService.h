@@ -39,6 +39,7 @@
     XMPPRosterMemoryStorage *xmppRosterStorage;
     XMPPReconnect *xmppReconnect;
     XMPPMUC *xmppMUC;
+    NSArray *trustedHosts;
     NSString *username;
     NSString *password;
     AuthMethod authMethod;
@@ -51,6 +52,7 @@
 @property (nonatomic, weak) id<RNXMPPServiceDelegate> delegate;
 
 +(RNXMPPService *) sharedInstance;
+- (void)trustHosts:(NSArray *)hosts;
 - (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth hostname:(NSString *)hostname port:(int)port;
 - (void)disconnect;
 - (void)sendMessage:(NSString *)text to:(NSString *)username;

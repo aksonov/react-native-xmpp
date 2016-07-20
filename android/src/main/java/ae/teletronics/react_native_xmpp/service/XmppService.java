@@ -1,6 +1,7 @@
 package ae.teletronics.react_native_xmpp.service;
 
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 
 /**
  * Created by Kristian Frølund on 7/19/16.
@@ -8,6 +9,10 @@ import com.facebook.react.bridge.ReactMethod;
  */
 
 public interface XmppService {
+
+    @ReactMethod
+    public void trustHosts(ReadableArray trustedHosts);
+
     @ReactMethod
     void connect(String jid, String password, String authMethod, String hostname, Integer port);
 

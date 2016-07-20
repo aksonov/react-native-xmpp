@@ -64,6 +64,10 @@ class XMPP {
         }
     }
 
+    trustHosts(hosts){
+        React.NativeModules.RNXMPP.trustHosts(hosts);
+    }
+
     connect(username, password, auth = RNXMPP.SCRAMSHA1, hostname, port){
         React.NativeModules.RNXMPP.connect(username, password, auth, hostname, port);
     }
