@@ -28,9 +28,4 @@ public interface XmppService {
 
     @ReactMethod
     void sendStanza(String stanza);
-
-    @ReactMethod
-    void joinRoom(String roomId, String nickName);
-
-    void sendRoomMessage(String message);
 }
