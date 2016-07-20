@@ -1,5 +1,7 @@
 package ae.teletronics.react_native_xmpp.service;
 
+import com.facebook.react.bridge.ReadableArray;
+
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.SmackException;
@@ -23,8 +25,12 @@ import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.muc.MultiUserChatManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ae.teletronics.react_native_xmpp.ssl.UnsafeSSLContext;
 
 
 /**
@@ -38,18 +44,25 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
     XMPPTCPConnection connection;
     Roster roster;
-
+    List<String> trustedHosts = new ArrayList<>();
     String password;
 
     public XmppServiceSmackImpl(XmppServiceListener xmppServiceListener) {
         this.xmppServiceListener = xmppServiceListener;
     }
 
+    @Override
+    public void trustHosts(ReadableArray trustedHosts) {
+        for(int i = 0; i < trustedHosts.size(); i++){
+            this.trustedHosts.add(trustedHosts.getString(i));
+        }
+    }
 
     @Override
     public void connect(String jid, String password, String authMethod, String hostname, Integer port) {
+        String serviceName = jid.split("@")[1];
         XMPPTCPConnectionConfiguration.Builder confBuilder = XMPPTCPConnectionConfiguration.builder()
-                .setServiceName(jid.split("@")[1])
+                .setServiceName(serviceName)
                 .setUsernameAndPassword(jid, password)
                 .setConnectTimeout(3000)
                 .setDebuggerEnabled(true)
@@ -61,7 +74,9 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
         if (port != null){
             confBuilder.setPort(port);
         }
-
+        if (trustedHosts.contains(hostname) || (hostname == null && trustedHosts.contains(serviceName))){
+            confBuilder.setCustomSSLContext(UnsafeSSLContext.INSTANCE.getContext());
+        }
         XMPPTCPConnectionConfiguration connectionConfiguration = confBuilder.build();
         connection = new XMPPTCPConnection(connectionConfiguration);
 

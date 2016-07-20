@@ -23,6 +23,9 @@ XMPP.on('login', (message)=>console.log("LOGGED!"));
 XMPP.on('connect', (message)=>console.log("CONNECTED!"));
 XMPP.on('disconnect', (message)=>console.log("DISCONNECTED!"));
 
+// trust hosts(Ignore self-signed ssl issues)
+XMPP.trustHosts(['chat.google.com']);
+
 // connect
 XMPP.connect(MYJID, MYPASSWORD);
 

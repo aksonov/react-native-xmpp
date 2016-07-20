@@ -233,6 +233,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     [[self xmppStream] sendElement:presence];
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark Configuration
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (void) trustHosts:(NSArray *)hosts
+{
+    trustedHosts = hosts;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Connect/disconnect
@@ -349,6 +358,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // The delegate method should likely have code similar to this,
     // but will presumably perform some extra security code stuff.
     // For example, allowing a specific self-signed certificate that is known to the app.
+    
+    if ([trustedHosts containsObject:xmppStream.hostName] || (xmppStream.hostName == nil || [trustedHosts containsObject:[username componentsSeparatedByString:@"@"][1]])) {
+        completionHandler(YES);
+    }
 
     dispatch_queue_t bgQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(bgQueue, ^{

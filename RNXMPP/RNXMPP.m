@@ -109,6 +109,10 @@ RCT_EXPORT_MODULE();
     [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPLogin" body:@{@"username":username, @"password":password}];
 }
 
+RCT_EXPORT_METHOD(trustHosts:(NSArray *)hosts){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] trustHosts:hosts];
+}
 
 RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password auth:(AuthMethod) auth hostname:(NSString *)hostname port(int)port){
     [RNXMPPService sharedInstance].delegate = self;
