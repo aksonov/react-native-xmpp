@@ -94,14 +94,6 @@ class XMPP {
             React.NativeModules.RNXMPP.disconnect();
         }
     }
-
-    joinRoom(roomJID, nickname) {
-        React.NativeModules.RNXMPP.joinRoom(roomJID, nickname);
-    }
-
-    sendRoomMessage(message) {
-        React.NativeModules.RNXMPP.sendRoomMessage(message);
-    }
 }
 
 module.exports = new XMPP();

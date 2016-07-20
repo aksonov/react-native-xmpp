@@ -70,16 +70,4 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements ae.telet
     public void sendStanza(String stanza) {
         this.xmppService.sendStanza(stanza);
     }
-
-    @Override
-    @ReactMethod
-    public void joinRoom(String roomId, String nickName) {
-        this.xmppService.joinRoom(roomId, nickName);
-    }
-
-    @Override
-    public void sendRoomMessage(String message){
-        this.xmppService.sendRoomMessage(message);
-    }
-
 }
