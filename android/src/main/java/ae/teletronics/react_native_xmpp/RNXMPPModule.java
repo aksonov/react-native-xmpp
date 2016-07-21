@@ -31,6 +31,7 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements ae.telet
     }
 
     @Override
+    @ReactMethod
     public void trustHosts(ReadableArray trustedHosts) {
         this.xmppService.trustHosts(trustedHosts);
     }

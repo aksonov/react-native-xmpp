@@ -12,6 +12,8 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
 
+import ae.teletronics.react_native_xmpp.utils.Parser;
+
 /**
  * Created by Kristian Frølund on 7/19/16.
  * Copyright (c) 2016. Teletronics. All rights reserved
@@ -59,8 +61,7 @@ public class RNXMPPCommunicationBridge implements XmppServiceListener {
 
     @Override
     public void onIQ(IQ iq) {
-        WritableMap writableMap = Arguments.createMap();
-        sendEvent(reactContext, RNXMPP_IQ, iq.toString());
+        sendEvent(reactContext, RNXMPP_IQ, Parser.parse(iq.toString()));
     }
 
     @Override
