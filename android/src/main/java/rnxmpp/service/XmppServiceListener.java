@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.service;
+package rnxmpp.service;
 
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Message;

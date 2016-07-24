@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.service;
+package rnxmpp.service;
 
 import com.facebook.react.bridge.ReadableArray;
 
@@ -22,7 +22,6 @@ import org.jivesoftware.smack.roster.RosterEntry;
 import org.jivesoftware.smack.roster.RosterLoadedListener;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
-import org.jivesoftware.smackx.muc.MultiUserChatManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ae.teletronics.react_native_xmpp.ssl.UnsafeSSLContext;
+import rnxmpp.ssl.UnsafeSSLContext;
 
 
 /**

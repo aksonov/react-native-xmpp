@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.ssl;
+package rnxmpp.ssl;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;

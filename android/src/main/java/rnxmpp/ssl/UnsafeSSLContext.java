@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.ssl;
+package rnxmpp.ssl;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;

@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.service;
+package rnxmpp.service;
 
 import android.support.annotation.Nullable;
 
@@ -11,6 +11,8 @@ import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
+
+import rnxmpp.utils.Parser;
 
 /**
  * Created by Kristian Frølund on 7/19/16.
@@ -59,8 +61,7 @@ public class RNXMPPCommunicationBridge implements XmppServiceListener {
 
     @Override
     public void onIQ(IQ iq) {
-        WritableMap writableMap = Arguments.createMap();
-        sendEvent(reactContext, RNXMPP_IQ, iq.toString());
+        sendEvent(reactContext, RNXMPP_IQ, Parser.parse(iq.toString()));
     }
 
     @Override
