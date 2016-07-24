@@ -95,11 +95,17 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
     }
 
     @Override
-    public void message(String text, String to) {
+    public void message(String text, String to, String thread) {
+        String chatIdentifier = (thread == null ? to : thread);
+
         ChatManager chatManager = ChatManager.getInstanceFor(connection);
-        Chat chat = chatManager.getThreadChat(to);
+        Chat chat = chatManager.getThreadChat(chatIdentifier);
         if (chat == null) {
-            chat = chatManager.createChat(to, this);
+            if (thread == null){
+                chat = chatManager.createChat(to, this);
+            }else{
+                chat = chatManager.createChat(to, thread, this);
+            }
         }
         try {
             chat.sendMessage(text);

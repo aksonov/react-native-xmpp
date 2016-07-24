@@ -511,7 +511,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
 
--(void)sendMessage:(NSString *)text to:(NSString *)to {
+-(void)sendMessage:(NSString *)text to:(NSString *)to thread:(NSString *)thread {
     if (!isXmppConnected){
         [self.delegate onError:[NSError errorWithDomain:@"xmpp" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Server is not connected, please reconnect"}]];
         return;
@@ -523,6 +523,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
     [msg addAttributeWithName:@"type" stringValue:@"chat"];
     [msg addAttributeWithName:@"to" stringValue: to];
+    
+    if (thread != nil) {
+        [msg addChild:[NSXMLElement elementWithName:@"thread" stringValue:thread]];
+    }
+    
     [msg addChild:body];
     [xmppStream sendElement:msg];
 }

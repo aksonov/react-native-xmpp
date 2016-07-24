@@ -72,9 +72,9 @@ class XMPP {
         React.NativeModules.RNXMPP.connect(username, password, auth, hostname, port);
     }
 
-    message(text, user){
+    message(text, user, thread = null){
         console.log("Message:"+text+" being sent to user: "+user);
-        React.NativeModules.RNXMPP.message(text, user);
+        React.NativeModules.RNXMPP.message(text, user, thread);
     }
 
     sendStanza(stanza){
