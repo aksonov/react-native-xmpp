@@ -4,7 +4,9 @@ var {StyleSheet, PixelRatio} = React;
 var styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: '#F7F7F7'
+        paddingTop: 70,
+        backgroundColor: '#F7F7F7',
+        
     },
     row: {
         flexDirection: 'row',
@@ -54,7 +56,6 @@ var styles = StyleSheet.create({
     messageBar: {
         backgroundColor:'white',
         flexDirection:'row',
-        top:0,
         left:0,
         right:0,
         height:55

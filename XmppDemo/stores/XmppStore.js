@@ -1,97 +1,80 @@
-'use strict';
-
-var {alt, Actions, PageStore} = require('react-native-router-flux');
-var XMPP = require('react-native-xmpp');
-var DOMAIN = "jabber.hot-chilli.net";
-var SCHEMA = "ios";
-
+import XMPP from 'react-native-xmpp';
+const DOMAIN = "jabber.hot-chilli.net";
+const SCHEMA = "ios";
+import {observable} from 'mobx';
+import autobind from 'autobind'
+@autobind
 class XmppStore {
+    @observable logged = false;
+    @observable loading = false;
+    @observable loginError = null;
+    @observable error = null;
+    @observable conversation = [];
+    
     constructor() {
-        // subscribe to custom action (we will process 'auth' and 'message')
-        this.bindAction(Actions.custom, this.onCustom.bind(this));
-
-        // subscribe to pop action to disconnect
-        this.bindAction(Actions.pop, this.onPop.bind(this));
-        XMPP.on('loginError', this.onLoginError.bind(this));
-        XMPP.on('error', this.onError.bind(this));
-        XMPP.on('disconnect', this.onDisconnect.bind(this));
-        XMPP.on('login', this.onLogin.bind(this));
-        XMPP.on('message', this.onReceiveMessage.bind(this));
-
-        this.loading = false;
-        this.logged = false;
-        this.loginError = null;
-        this.conversations = {};
+        XMPP.on('loginError', this.onLoginError);
+        XMPP.on('error', this.onError);
+        XMPP.on('disconnect', this.onDisconnect);
+        XMPP.on('login', this.onLogin);
+        XMPP.on('message', this.onReceiveMessage);
         // default values
         this.local = 'rntestuser1';
         this.remote = 'rntestuser2';
     }
-
-    onCustom({name, data}){
-        if (name == 'auth'){
-            return this.onAuth(data)
-        } else if (name == 'message'){
-            return this.onSendMessage(data);
-        }
-        return false;
-    }
-
+    
     _userForName(name){
         return name + '@' + DOMAIN + "/" + SCHEMA;
     }
 
-    onSendMessage({remote, message}){
-        if (!remote || !remote.trim()){
+    sendMessage(message){
+        if (!this.remote || !this.remote.trim()){
             console.error("No remote username is defined");
         }
         if (!message || !message.trim()){
             return false;
         }
-        if (!this.conversations[remote]){
-            this.conversations[remote] = [];
-        }
         // add to list of messages
-        this.conversations[remote].unshift({own:true, text:message.trim()});
+        this.conversation.unshift({own:true, text:message.trim()});
         // empty sent message
-        this.message = null;
         this.error = null;
         // send to XMPP server
         XMPP.message(message.trim(), this._userForName(this.remote))
     }
 
     onReceiveMessage({from, body}){
+        console.log("onReceiveMessage")
         // extract username from XMPP UID
         if (!from || !body){
             return;
         }
         var name = from.match(/^([^@]*)@/)[1];
-        if (!this.conversations[name]){
-            this.conversations[name] = [];
-        }
-        this.conversations[name].unshift({own:false, text:body});
-        // update state if message is received from current remote user
-        if (name == this.remote) {
-            this.setState({error: null, conversations: this.conversations, remote: this.remote});
-        }
+        this.conversation.unshift({own:false, text:body});
     }
 
     onLoginError(){
-        this.setState({loading:false, loginError:"Cannot authenticate, please use correct local username"});
+        this.loading = false;
+        this.conversation.replace([]);
+        this.loginError = "Cannot authenticate, please use correct local username";
     }
 
     onError(message){
-        this.setState({error: message});
+        this.error = message;
     }
 
     onDisconnect(message){
-        this.setState({logged: false, loginError:message});
+        this.logged = false;
+        this.loginError = message;
     }
 
     onLogin(){
-        this.setState({loading:false, loginError:null, logged: true});
+        console.log("LOGGED!");
+        this.conversation.replace([]);
+        this.loading = false;
+        this.loginError = null;
+        this.logged = true;
     }
 
-    onAuth({local, remote}){
+    login({local, remote}){
         this.local = local;
         this.remote = remote;
         if (!local || !local.trim()){
@@ -110,15 +93,10 @@ class XmppStore {
 
     }
 
-    onPop() {
-        // proccess pop to login screen only
-        this.waitFor(PageStore.dispatchToken);
-        if (PageStore.getState().currentRoute == 'login'){
-            XMPP.disconnect();
-        }
-        return false;
+    disconnect() {
+        XMPP.disconnect();
     }
 
 }
 
-module.exports = alt.createStore(XmppStore, 'XmppStore');
+export default new XmppStore();
