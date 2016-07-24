@@ -119,7 +119,7 @@ RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password auth:(Au
     [[RNXMPPService sharedInstance] connect:jid withPassword:password auth:auth hostname:hostname port:port];
 }
 
-RCT_EXPORT_METHOD(message:(NSString *)text to:(NSString *)to){
+RCT_EXPORT_METHOD(message:(NSString *)text to:(NSString *)to thread:(NSString *)threadId){
     [RNXMPPService sharedInstance].delegate = self;
     [[RNXMPPService sharedInstance] sendMessage:text to:to];
 }

@@ -44,8 +44,8 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements rnxmpp.s
 
     @Override
     @ReactMethod
-    public void message(String text, String to){
-        this.xmppService.message(text, to);
+    public void message(String text, String to, String thread){
+        this.xmppService.message(text, to, thread);
     }
 
     @Override
