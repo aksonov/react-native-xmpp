@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.service;
+package rnxmpp.service;
 
 import android.support.annotation.Nullable;
 
@@ -12,7 +12,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
 
-import ae.teletronics.react_native_xmpp.utils.Parser;
+import rnxmpp.utils.Parser;
 
 /**
  * Created by Kristian Frølund on 7/19/16.

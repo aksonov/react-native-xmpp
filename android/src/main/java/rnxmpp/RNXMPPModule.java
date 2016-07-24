@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp;
+package rnxmpp;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -7,14 +7,14 @@ import com.facebook.react.bridge.ReadableArray;
 
 import java.util.logging.Logger;
 
-import ae.teletronics.react_native_xmpp.service.RNXMPPCommunicationBridge;
-import ae.teletronics.react_native_xmpp.service.XmppServiceSmackImpl;
+import rnxmpp.service.RNXMPPCommunicationBridge;
+import rnxmpp.service.XmppServiceSmackImpl;
 
 /**
  * Created by Kristian Frølund on 7/19/16.
  * Copyright (c) 2016. Teletronics. All rights reserved
  */
-public class RNXMPPModule extends ReactContextBaseJavaModule implements ae.teletronics.react_native_xmpp.service.XmppService {
+public class RNXMPPModule extends ReactContextBaseJavaModule implements rnxmpp.service.XmppService {
 
     public static final String MODULE_NAME = "RNXMPP";
     Logger logger = Logger.getLogger(RNXMPPModule.class.getName());

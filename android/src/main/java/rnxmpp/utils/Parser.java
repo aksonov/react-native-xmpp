@@ -2,7 +2,7 @@
  * Copyright (c) 2016. Teletronics. All rights reserved
  */
 
-package ae.teletronics.react_native_xmpp.utils;
+package rnxmpp.utils;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableType;

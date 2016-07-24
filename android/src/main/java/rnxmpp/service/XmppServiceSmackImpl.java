@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.service;
+package rnxmpp.service;
 
 import com.facebook.react.bridge.ReadableArray;
 
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ae.teletronics.react_native_xmpp.ssl.UnsafeSSLContext;
+import rnxmpp.ssl.UnsafeSSLContext;
 
 
 /**

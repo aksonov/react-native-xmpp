@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp;
+package rnxmpp;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

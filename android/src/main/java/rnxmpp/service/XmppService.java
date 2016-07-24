@@ -1,4 +1,4 @@
-package ae.teletronics.react_native_xmpp.service;
+package rnxmpp.service;
 
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
