@@ -1,6 +1,7 @@
 package com.xmppdemo;
 
 import com.facebook.react.ReactActivity;
+import rnxmpp.RNXMPPPackage;
 
 public class MainActivity extends ReactActivity {
 
