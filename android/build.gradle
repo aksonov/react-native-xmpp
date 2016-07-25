@@ -39,4 +39,6 @@ dependencies {
     compile "org.igniterealtime.smack:smack-im:4.1.0"
     // Optional for XMPP extensions support
     compile "org.igniterealtime.smack:smack-extensions:4.1.0"
+    // Support SCRAM-SHA-1
+    compile "org.igniterealtime.smack:smack-sasl-provided:4.1.0"
 }
