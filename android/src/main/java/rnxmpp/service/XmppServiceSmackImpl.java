@@ -59,14 +59,20 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
     @Override
     public void connect(String jid, String password, String authMethod, String hostname, Integer port) {
-        String serviceName = jid.split("@")[1];
+        String[] jidParts = jid.split("@");
+        String[] serviceNameParts = jidParts[1].split("/");
+        String serviceName = serviceNameParts[0];
+
         XMPPTCPConnectionConfiguration.Builder confBuilder = XMPPTCPConnectionConfiguration.builder()
                 .setServiceName(serviceName)
-                .setUsernameAndPassword(jid, password)
+                .setUsernameAndPassword(jidParts[0], password)
                 .setConnectTimeout(3000)
                 .setDebuggerEnabled(true)
                 .setSecurityMode(ConnectionConfiguration.SecurityMode.required);
 
+        if (serviceNameParts.length>1){
+            confBuilder.setResource(serviceNameParts[1]);
+        }
         if (hostname != null){
             confBuilder.setHost(hostname);
         }

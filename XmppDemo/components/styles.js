@@ -1,6 +1,6 @@
 'use strict';
 var React = require('react-native');
-var {StyleSheet, PixelRatio} = React;
+var {StyleSheet, PixelRatio, Platform} = React;
 var styles = StyleSheet.create({
     container: {
         flex:1,
@@ -42,11 +42,9 @@ var styles = StyleSheet.create({
         fontSize:15,
     },
     rowInput: {
-        left:10,
-        right:10,
         fontSize:15,
         flex:1,
-        height:30,
+        height:(Platform.OS=='ios') ? 30 : 50
     },
     messageItem: {
         padding:10,
