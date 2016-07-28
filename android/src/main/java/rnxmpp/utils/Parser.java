@@ -100,5 +100,5 @@ public class Parser {
             }
         }
         return newArray;
-    }g
+    }
 }
