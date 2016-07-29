@@ -5,6 +5,7 @@
 package rnxmpp.utils;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
@@ -66,7 +67,7 @@ public class Parser {
                     writableMap.putArray(childNode.getNodeName(), childArray);
                 }
                 if (writableMap.hasKey(childNode.getNodeName())){
-                    WritableArray writableArray = Arguments.fromArray(writableMap.getArray(childNode.getNodeName()));
+                    WritableArray writableArray = fromArray(writableMap.getArray(childNode.getNodeName()));
                     writableArray.pushMap(parse(childNode));
                     writableMap.putArray(childNode.getNodeName(), writableArray);
                 }else{
@@ -82,4 +83,22 @@ public class Parser {
         return writableMap;
     }
 
+    static WritableArray fromArray(ReadableArray readableArray){
+        WritableArray newArray = Arguments.createArray();
+        for (int i = 0; i < readableArray.size(); i++) {
+            ReadableType type = readableArray.getType(i);
+            if (type.equals(ReadableType.Map)){
+                newArray.pushMap(Arguments.fromBundle(Arguments.toBundle(readableArray.getMap(i))));
+            }else if(type.equals(ReadableType.Array)){
+                newArray.pushArray(fromArray(readableArray.getArray(i)));
+            }else if(type.equals(ReadableType.Boolean)){
+                newArray.pushBoolean(readableArray.getBoolean(i));
+            }else if(type.equals(ReadableType.Number)){
+                newArray.pushInt(readableArray.getInt(i));
+            }else if(type.equals(ReadableType.String)){
+                newArray.pushString(readableArray.getString(i));
+            }
+        }
+        return newArray;
+    }
 }
