@@ -1,5 +1,6 @@
 package rnxmpp.service;
 
+import android.os.AsyncTask;
 import com.facebook.react.bridge.ReadableArray;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -59,7 +60,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
     @Override
     public void connect(String jid, String password, String authMethod, String hostname, Integer port) {
-        String[] jidParts = jid.split("@");
+        final String[] jidParts = jid.split("@");
         String[] serviceNameParts = jidParts[1].split("/");
         String serviceName = serviceNameParts[0];
 
@@ -93,11 +94,30 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
         roster.addRosterLoadedListener(this);
 
         try {
-            connection.connect().login();
+            connection.connect();
         } catch (XMPPException | SmackException | IOException e) {
             logger.log(Level.SEVERE, "Could not connect to xmpp", e);
             this.xmppServiceListener.onLoginError(e);
         }
+
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    connection.login();
+                } catch (XMPPException | SmackException | IOException e) {
+                    logger.log(Level.SEVERE, "Could not login for user " + jidParts[0], e);
+                    XmppServiceSmackImpl.this.xmppServiceListener.onLoginError(e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void dummy) {
+
+            }
+        }.execute();
     }
 
     @Override
