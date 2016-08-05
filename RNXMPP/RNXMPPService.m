@@ -5,6 +5,7 @@
 #import "XMPPLogging.h"
 #import "XMPPReconnect.h"
 #import "XMPPUser.h"
+#import "XMPPvCardTemp.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
 #import <CFNetwork/CFNetwork.h>
@@ -555,6 +556,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void)fetchRoster {
     [xmppRoster fetchRoster];
+}
+
+- (void)editProfile:(NSDictionary *)params avatar:(NSString *)avatar{
+
+    NSXMLElement *vCardXML = [NSXMLElement elementWithName:@"vCard" xmlns:@"vcard-temp"];
+    XMPPvCardTemp *newvCardTemp = [XMPPvCardTemp vCardTempFromElement:vCardXML];
+
+    for(NSString *key in params.allKeys){
+        [newvCardTemp setValue:[params objectForKey:key] forKey:key];
+    }
+
+    if (avatar){
+        NSData *avatarData = [[NSData alloc]initWithBase64EncodedString:avatar options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        [newvCardTemp setPhoto:avatarData];
+    }
+
+    XMPPIQ *iq = [XMPPIQ iqWithType:@"set" to:nil elementID:[xmppStream generateUUID] child:newvCardTemp];
+    [xmppStream sendElement:iq];
 }
 
 @end
