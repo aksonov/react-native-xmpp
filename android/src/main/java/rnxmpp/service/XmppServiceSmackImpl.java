@@ -67,11 +67,13 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
                 .setServiceName(serviceName)
                 .setUsernameAndPassword(jidParts[0], password)
                 .setConnectTimeout(3000)
-                .setDebuggerEnabled(true)
+                //.setDebuggerEnabled(true)
                 .setSecurityMode(ConnectionConfiguration.SecurityMode.required);
 
         if (serviceNameParts.length>1){
             confBuilder.setResource(serviceNameParts[1]);
+        } else {
+            confBuilder.setResource(Long.toHexString(Double.doubleToLongBits(Math.random())));
         }
         if (hostname != null){
             confBuilder.setHost(hostname);
@@ -156,9 +158,30 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
         }
     }
 
+    public class StanzaPacket extends org.jivesoftware.smack.packet.Stanza {
+         private String xmlString;
+
+         public StanzaPacket(String xmlString) {
+             super();
+             this.xmlString = xmlString;
+         }
+
+         @Override
+         public XmlStringBuilder toXML() {
+             XmlStringBuilder xml = new XmlStringBuilder();
+             xml.append(this.xmlString);
+             return xml;
+         }
+    }
+
     @Override
     public void sendStanza(String stanza) {
-        throw new UnsupportedOperationException("Can not send stanzas in react-native-xmpp android implementation.");
+        StanzaPacket packet = new StanzaPacket(stanza);
+        try {
+            connection.sendPacket(packet);
+        } catch (SmackException e) {
+            logger.log(Level.WARNING, "Could not send stanza", e);
+        }
     }
 
     @Override
