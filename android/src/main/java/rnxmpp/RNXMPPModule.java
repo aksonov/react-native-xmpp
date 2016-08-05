@@ -4,6 +4,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 
 import java.util.logging.Logger;
 
@@ -76,5 +77,11 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements rnxmpp.s
     @ReactMethod
     public void sendStanza(String stanza) {
         this.xmppService.sendStanza(stanza);
+    }
+
+    @Override
+    @ReactMethod
+    public void editProfile(final ReadableMap options, String avatar) {
+        this.xmppService.editProfile(options, avatar);
     }
 }
