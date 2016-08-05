@@ -276,11 +276,9 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
             vCard.setField(key.toUpperCase(), value);
         }
 
-
         if(avatar != null){
             vCard.setAvatar(avatar, "image/jpeg");
         }
-
 
         try {
             VCardManager vCardManager = VCardManager.getInstanceFor(connection);
