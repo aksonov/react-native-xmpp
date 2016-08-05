@@ -1,9 +1,12 @@
 package rnxmpp.service;
 
+import android.support.annotation.Nullable;
+
 import com.facebook.react.bridge.ReadableArray;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ConnectionListener;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.StanzaListener;
 import org.jivesoftware.smack.XMPPConnection;
@@ -29,6 +32,7 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,6 +101,8 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
         roster = Roster.getInstanceFor(connection);
         roster.addRosterLoadedListener(this);
 
+        supportSASLMechanism(authMethod);
+
         try {
             connection.connect();
         } catch (XMPPException | SmackException | IOException e) {
@@ -122,6 +128,18 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
             }
         }.execute();
+    }
+
+    private void supportSASLMechanism(@Nullable String mechanism){
+        if(mechanism == null){
+            mechanism = "PLAIN";
+        }
+        Map<String, String> mechanisms = SASLAuthentication.getRegisterdSASLMechanisms();
+        for (String registeredMechanism : mechanisms.values()) {
+            if(!mechanism.equals(registeredMechanism)){
+                SASLAuthentication.blacklistSASLMechanism(registeredMechanism);
+            }
+        }
     }
 
     @Override
