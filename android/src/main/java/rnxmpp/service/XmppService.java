@@ -36,5 +36,5 @@ public interface XmppService {
     void sendStanza(String stanza);
 
     @ReactMethod
-    void editProfile(final ReadableMap params, String avatar);
+    void editProfile(ReadableMap params, String avatar);
 }
