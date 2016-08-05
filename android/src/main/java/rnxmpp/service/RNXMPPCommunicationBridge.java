@@ -51,6 +51,7 @@ public class RNXMPPCommunicationBridge implements XmppServiceListener {
         params.putString("subject", message.getSubject());
         params.putString("body", message.getBody());
         params.putString("from", message.getFrom());
+        params.putString("src", message.toXML().toString());
         sendEvent(reactContext, RNXMPP_MESSAGE, params);
     }
 
