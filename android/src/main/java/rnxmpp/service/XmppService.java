@@ -2,6 +2,7 @@ package rnxmpp.service;
 
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 
 /**
  * Created by Kristian Frølund on 7/19/16.
@@ -33,4 +34,7 @@ public interface XmppService {
 
     @ReactMethod
     void sendStanza(String stanza);
+
+    @ReactMethod
+    void editProfile(final ReadableMap params, String avatar);
 }
