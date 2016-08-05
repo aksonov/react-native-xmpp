@@ -81,7 +81,7 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements rnxmpp.s
 
     @Override
     @ReactMethod
-    public void editProfile(final ReadableMap options, String avatar) {
+    public void editProfile(ReadableMap options, String avatar) {
         this.xmppService.editProfile(options, avatar);
     }
 }
