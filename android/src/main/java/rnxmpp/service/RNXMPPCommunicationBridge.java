@@ -22,6 +22,7 @@ import rnxmpp.utils.Parser;
 public class RNXMPPCommunicationBridge implements XmppServiceListener {
 
     public static final String RNXMPP_ERROR =       "RNXMPPError";
+    public static final String RNXMPP_LOGIN_ERROR = "RNXMPPLoginError";
     public static final String RNXMPP_MESSAGE =     "RNXMPPMessage";
     public static final String RNXMPP_IQ =          "RNXMPPIQ";
     public static final String RNXMPP_PRESENCE =    "RNXMPPPresence";
@@ -40,8 +41,13 @@ public class RNXMPPCommunicationBridge implements XmppServiceListener {
     }
 
     @Override
+    public void onLoginError(String errorMessage) {
+        sendEvent(reactContext, RNXMPP_LOGIN_ERROR, errorMessage);
+    }
+
+    @Override
     public void onLoginError(Exception e) {
-        sendEvent(reactContext, RNXMPP_ERROR, e.getLocalizedMessage());
+        this.onLoginError(e.getLocalizedMessage());
     }
 
     @Override
