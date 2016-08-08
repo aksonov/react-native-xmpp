@@ -266,7 +266,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
     }
 
     @Override
-    public void editProfile(ReadableMap params, String avatar){
+    public void editProfile(final ReadableMap params, final String avatar){
         VCard vCard = new VCard();
 
         ReadableMapKeySetIterator iterator = params.keySetIterator();
