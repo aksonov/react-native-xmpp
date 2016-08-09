@@ -448,7 +448,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSArray *users = [sender unsortedUsers];
     NSMutableArray *list = [NSMutableArray array];
     for (XMPPUserMemoryStorageObject *user in users){
-        [list addObject:@{@"username": [[user jid] user], @"subscription": [user subscription]}];
+        [list addObject:@{
+                        @"username": [[user jid] user],
+                        @"subscription": [user subscription],
+                        @"displayName": [user displayName],
+                        @"groups": [user groups],
+                        }];
     }
     [self.delegate onRosterReceived:list];
 
