@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
 
@@ -11,6 +12,8 @@ import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
+import org.jivesoftware.smack.roster.RosterEntry;
+import org.jivesoftware.smack.roster.RosterGroup;
 
 import rnxmpp.utils.Parser;
 
@@ -24,6 +27,7 @@ public class RNXMPPCommunicationBridge implements XmppServiceListener {
     public static final String RNXMPP_ERROR =       "RNXMPPError";
     public static final String RNXMPP_LOGIN_ERROR = "RNXMPPLoginError";
     public static final String RNXMPP_MESSAGE =     "RNXMPPMessage";
+    public static final String RNXMPP_ROSTER =      "RNXMPPRoster";
     public static final String RNXMPP_IQ =          "RNXMPPIQ";
     public static final String RNXMPP_PRESENCE =    "RNXMPPPresence";
     public static final String RNXMPP_CONNECT =     "RNXMPPConnect";
@@ -63,7 +67,20 @@ public class RNXMPPCommunicationBridge implements XmppServiceListener {
 
     @Override
     public void onRosterReceived(Roster roster) {
-        //Todo: Implement
+        WritableArray rosterResponse = Arguments.createArray();
+        for (RosterEntry rosterEntry : roster.getEntries()) {
+            WritableMap rosterProps = Arguments.createMap();
+            rosterProps.putString("username", rosterEntry.getUser());
+            rosterProps.putString("displayName", rosterEntry.getName());
+            WritableArray groupArray = Arguments.createArray();
+            for (RosterGroup rosterGroup : rosterEntry.getGroups()) {
+                groupArray.pushString(rosterGroup.getName());
+            }
+            rosterProps.putArray("groups", groupArray);
+            rosterProps.putString("subscription", rosterEntry.getType().toString());
+            rosterResponse.pushMap(rosterProps);
+        }
+        sendEvent(reactContext, RNXMPP_ROSTER, rosterResponse);
     }
 
     @Override
