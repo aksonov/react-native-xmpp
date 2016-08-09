@@ -12,6 +12,7 @@ import org.jivesoftware.smack.roster.Roster;
 
 public interface XmppServiceListener {
     void onError(Exception e);
+    void onLoginError(String errorMessage);
     void onLoginError(Exception e);
     void onMessage(Message message);
     void onRosterReceived(Roster roster);
@@ -20,4 +21,5 @@ public interface XmppServiceListener {
     void onConnnect(String username, String password);
     void onDisconnect(Exception e);
     void onLogin(String username, String password);
+
 }

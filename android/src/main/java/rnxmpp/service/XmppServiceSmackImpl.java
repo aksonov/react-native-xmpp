@@ -20,6 +20,7 @@ import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterEntry;
 import org.jivesoftware.smack.roster.RosterLoadedListener;
+import org.jivesoftware.smack.sasl.SASLErrorException;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smack.util.XmlStringBuilder;
@@ -97,22 +98,20 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
         roster = Roster.getInstanceFor(connection);
         roster.addRosterLoadedListener(this);
 
-        try {
-            connection.connect();
-        } catch (XMPPException | SmackException | IOException e) {
-            logger.log(Level.SEVERE, "Could not connect to xmpp", e);
-            this.xmppServiceListener.onLoginError(e);
-        }
-
         new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    connection.login();
+                    connection.connect().login();
                 } catch (XMPPException | SmackException | IOException e) {
                     logger.log(Level.SEVERE, "Could not login for user " + jidParts[0], e);
-                    XmppServiceSmackImpl.this.xmppServiceListener.onLoginError(e);
+                    if (e instanceof SASLErrorException){
+                        XmppServiceSmackImpl.this.xmppServiceListener.onLoginError(((SASLErrorException) e).getSASLFailure().toString());
+                    }else{
+                        XmppServiceSmackImpl.this.xmppServiceListener.onError(e);
+                    }
+
                 }
                 return null;
             }
