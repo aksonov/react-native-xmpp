@@ -84,6 +84,10 @@ class XMPP {
         RNXMPP.editProfile(params, avatar);
     }
 
+    getProfile(id){
+        RNXMPP.getProfile(id);
+    }
+
     sendStanza(stanza){
         RNXMPP.sendStanza(stanza);
     }

@@ -61,6 +61,7 @@
 -(void)fetchRoster;
 -(void)sendStanza:(NSString *)stanza;
 - (void)editProfile:(NSDictionary *)params avatar:(NSString *)avatar;
+- (void)getProfile:(NSString *)JID;
 
 @end
 

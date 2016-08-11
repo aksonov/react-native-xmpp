@@ -154,6 +154,11 @@ RCT_EXPORT_METHOD(editProfile:(NSDictionary *)params avatar:(NSString *)avatar){
     [[RNXMPPService sharedInstance] editProfile:params avatar:avatar];
 }
 
+RCT_EXPORT_METHOD(getProfile:(NSString *)jid){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] getProfile:jid];
+}
+
 - (NSDictionary *)constantsToExport
 {
     return @{ PLAIN_AUTH : @(Plain),

@@ -581,4 +581,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream sendElement:iq];
 }
 
+- (void)getProfile:(NSString *)JID {
+    XMPPJID *xmppjid = nil;
+    if(JID){
+        xmppjid = [XMPPJID jidWithString:JID];
+    }
+
+    [xmppStream sendElement:[XMPPvCardTemp iqvCardRequestForJID:xmppStream.myJID]];
+}
+
 @end

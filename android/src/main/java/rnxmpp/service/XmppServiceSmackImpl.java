@@ -287,4 +287,20 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
             logger.log(Level.WARNING, "Could not save profile", e);
         }
     }
+
+    @Override
+    public void getProfile(String jid) {
+        try {
+            VCardManager vCardManager = VCardManager.getInstanceFor(connection);
+            VCard vCard = null;
+            if(jid != null && !jid.isEmpty()) {
+                vCard = vCardManager.loadVCard(jid);
+            } else {
+                vCard = vCardManager.loadVCard();
+            }
+            this.xmppServiceListener.onIQ(vCard);
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "Could not get profile", e);
+        }
+    }
 }

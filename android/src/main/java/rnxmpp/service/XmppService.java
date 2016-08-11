@@ -37,4 +37,7 @@ public interface XmppService {
 
     @ReactMethod
     void editProfile(final ReadableMap params, final String avatar);
+
+    @ReactMethod
+    void getProfile(final String jid);
 }
