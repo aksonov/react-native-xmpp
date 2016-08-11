@@ -563,22 +563,33 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppRoster fetchRoster];
 }
 
-- (void)editProfile:(NSDictionary *)params avatar:(NSString *)avatar{
+- (void)editVCard:(NSDictionary *)params{
 
     NSXMLElement *vCardXML = [NSXMLElement elementWithName:@"vCard" xmlns:@"vcard-temp"];
     XMPPvCardTemp *newvCardTemp = [XMPPvCardTemp vCardTempFromElement:vCardXML];
 
     for(NSString *key in params.allKeys){
-        [newvCardTemp setValue:[params objectForKey:key] forKey:key];
-    }
-
-    if (avatar){
-        NSData *avatarData = [[NSData alloc]initWithBase64EncodedString:avatar options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        [newvCardTemp setPhoto:avatarData];
+        NSString *value = [params objectForKey:key];
+        if([[key lowercaseString] containsString:@"photo"]){
+            NSData *avatarData = [[NSData alloc]initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            [newvCardTemp setPhoto:avatarData];
+        } else {
+            [newvCardTemp setValue:value forKey:key];
+        }
     }
 
     XMPPIQ *iq = [XMPPIQ iqWithType:@"set" to:nil elementID:[xmppStream generateUUID] child:newvCardTemp];
     [xmppStream sendElement:iq];
+}
+
+
+- (void)getVCard:(NSString *)JID {
+    XMPPJID *xmppjid = nil;
+    if(JID){
+        xmppjid = [XMPPJID jidWithString:JID];
+    }
+
+    [xmppStream sendElement:[XMPPvCardTemp iqvCardRequestForJID:xmppStream.myJID]];
 }
 
 @end

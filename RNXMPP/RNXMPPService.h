@@ -60,7 +60,8 @@
 - (void)removeRoster:(NSString *)to;
 -(void)fetchRoster;
 -(void)sendStanza:(NSString *)stanza;
-- (void)editProfile:(NSDictionary *)params avatar:(NSString *)avatar;
+- (void)editVCard:(NSDictionary *)params;
+- (void)getVCard:(NSString *)JID;
 
 @end
 

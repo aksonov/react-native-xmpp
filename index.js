@@ -80,8 +80,12 @@ class XMPP {
         React.NativeModules.RNXMPP.message(text, user, thread);
     }
 
-    editProfile(params, avatar){
-        RNXMPP.editProfile(params, avatar);
+    editVCard(params){
+        RNXMPP.editVCard(params);
+    }
+
+    getVCard(id){
+        RNXMPP.getVCard(id);
     }
 
     sendStanza(stanza){
