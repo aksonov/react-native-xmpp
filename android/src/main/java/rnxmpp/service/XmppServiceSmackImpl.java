@@ -264,20 +264,21 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
         logger.log(Level.WARNING, "Could not reconnect", e);
 
     }
-
+    
     @Override
-    public void editProfile(final ReadableMap params, final String avatar){
+    public void editVCard(final ReadableMap params){
         VCard vCard = new VCard();
 
         ReadableMapKeySetIterator iterator = params.keySetIterator();
         while (iterator.hasNextKey()) {
             String key = iterator.nextKey();
             String value = params.getString(key);
-            vCard.setField(key.toUpperCase(), value);
-        }
 
-        if(avatar != null){
-            vCard.setAvatar(avatar, "image/jpeg");
+            if(key.contains("photo")){
+                vCard.setAvatar(value, "image/jpeg");
+            } else {
+                vCard.setField(key.toUpperCase(), value);
+            }
         }
 
         try {
@@ -289,7 +290,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
     }
 
     @Override
-    public void getProfile(String jid) {
+    public void getVCard(String jid) {
         try {
             VCardManager vCardManager = VCardManager.getInstanceFor(connection);
             VCard vCard = null;

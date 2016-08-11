@@ -149,14 +149,14 @@ RCT_EXPORT_METHOD(sendStanza:(NSString *)stanza){
     [[RNXMPPService sharedInstance] sendStanza:stanza];
 }
 
-RCT_EXPORT_METHOD(editProfile:(NSDictionary *)params avatar:(NSString *)avatar){
+RCT_EXPORT_METHOD(editVCard:(NSDictionary *)params){
     [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] editProfile:params avatar:avatar];
+    [[RNXMPPService sharedInstance] editVCard:params];
 }
 
-RCT_EXPORT_METHOD(getProfile:(NSString *)jid){
+RCT_EXPORT_METHOD(getVCard:(NSString *)jid){
     [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] getProfile:jid];
+    [[RNXMPPService sharedInstance] getVCard:jid];
 }
 
 - (NSDictionary *)constantsToExport

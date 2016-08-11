@@ -36,8 +36,8 @@ public interface XmppService {
     void sendStanza(String stanza);
 
     @ReactMethod
-    void editProfile(final ReadableMap params, final String avatar);
+    void editVCard(final ReadableMap params);
 
     @ReactMethod
-    void getProfile(final String jid);
+    void getVCard(final String jid);
 }
