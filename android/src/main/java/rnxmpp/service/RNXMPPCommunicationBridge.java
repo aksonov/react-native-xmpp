@@ -90,7 +90,12 @@ public class RNXMPPCommunicationBridge implements XmppServiceListener {
 
     @Override
     public void onPresence(Presence presence) {
-        sendEvent(reactContext, RNXMPP_PRESENCE, presence.toString());
+        WritableMap presenceMap = Arguments.createMap();
+        presenceMap.putString("type", presence.getType().toString());
+        presenceMap.putString("from", presence.getFrom());
+        presenceMap.putString("status", presence.getStatus());
+        presenceMap.putString("mode", presence.getMode().toString());
+        sendEvent(reactContext, RNXMPP_PRESENCE, presenceMap);
     }
 
     @Override
