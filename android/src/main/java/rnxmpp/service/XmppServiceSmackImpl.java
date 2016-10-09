@@ -12,6 +12,7 @@ import org.jivesoftware.smack.chat.Chat;
 import org.jivesoftware.smack.chat.ChatManager;
 import org.jivesoftware.smack.chat.ChatManagerListener;
 import org.jivesoftware.smack.chat.ChatMessageListener;
+import org.jivesoftware.smack.filter.OrFilter;
 import org.jivesoftware.smack.filter.StanzaTypeFilter;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Message;
@@ -91,7 +92,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
         XMPPTCPConnectionConfiguration connectionConfiguration = confBuilder.build();
         connection = new XMPPTCPConnection(connectionConfiguration);
 
-        connection.addAsyncStanzaListener(this, new StanzaTypeFilter(IQ.class));
+        connection.addAsyncStanzaListener(this, new OrFilter(new StanzaTypeFilter(IQ.class), new StanzaTypeFilter(Presence.class)));
         connection.addConnectionListener(this);
 
         ChatManager.getInstanceFor(connection).addChatListener(this);
@@ -212,7 +213,13 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
     @Override
     public void processPacket(Stanza packet) throws SmackException.NotConnectedException {
-        this.xmppServiceListener.onIQ((IQ) packet);
+        if (packet instanceof IQ){
+            this.xmppServiceListener.onIQ((IQ) packet);
+        }else if (packet instanceof Presence){
+            this.xmppServiceListener.onPresence((Presence) packet);
+        }else{
+            logger.log(Level.WARNING, "Got a Stanza, of unknown subclass", packet.toXML());
+        }
     }
 
     @Override
