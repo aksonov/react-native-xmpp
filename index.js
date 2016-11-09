@@ -15,6 +15,12 @@ var map = {
     'roster': 'RNXMPPRoster'
 }
 
+const LOG = (message) => {
+  if (__DEV__) {
+    console.log(message);
+  }
+}
+
 class XMPP {
     PLAIN = RNXMPP.PLAIN;
     SCRAM = RNXMPP.SCRAMSHA1;
@@ -31,28 +37,28 @@ class XMPP {
     }
 
     onConnected(){
-        console.log("Connected");
+        LOG("Connected");
         this.isConnected = true;
     }
 
     onLogin(){
-        console.log("Logged");
+        LOG("Logged");
         this.isLogged = true;
     }
 
     onDisconnected(error){
-        console.log("Disconnected, error"+error);
+        LOG("Disconnected, error"+error);
         this.isConnected = false;
         this.isLogged = false;
     }
 
     onError(text){
-        console.log("Error: "+text);
+        LOG("Error: "+text);
     }
 
     onLoginError(text){
         this.isLogged = false;
-        console.log("LoginError: "+text);
+        LOG("LoginError: "+text);
     }
 
     on(type, callback){
@@ -76,7 +82,7 @@ class XMPP {
     }
 
     message(text, user, thread = null){
-        console.log("Message:"+text+" being sent to user: "+user);
+        LOG("Message:"+text+" being sent to user: "+user);
         React.NativeModules.RNXMPP.message(text, user, thread);
     }
 
