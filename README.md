@@ -36,6 +36,12 @@ XMPP.message('Hello world!', TOJID);
 // disconnect
 XMPP.disconnect();
 
+// remove all event listeners (recommended on componentWillUnmount)
+XMPP.removeListeners();
+
+// remove specific event listener (type can be 'message', 'iq', etc.)
+XMPP.removeListener(TYPE);
+
 ```
 
 

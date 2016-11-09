@@ -17,7 +17,7 @@ var map = {
 
 const LOG = (message) => {
   if (__DEV__) {
-    console.log(message);
+    console.log('react-native-xmpp: ' + message);
   }
 }
 
@@ -38,24 +38,18 @@ class XMPP {
         ];
     }
 
-    componentWillUnmount() {
-        for (var i = 0; i < this.listeners.length; i++) {
-            this.listeners[i].remove();
-        }
-    }
-
     onConnected(){
         LOG("Connected");
         this.isConnected = true;
     }
 
     onLogin(){
-        LOG("Logged");
+        LOG("Login");
         this.isLogged = true;
     }
 
     onDisconnected(error){
-        LOG("Disconnected, error"+error);
+        LOG("Disconnected, error: "+error);
         this.isConnected = false;
         this.isLogged = false;
     }
@@ -72,11 +66,35 @@ class XMPP {
     on(type, callback){
         if (map[type]){
             const listener = NativeAppEventEmitter.addListener(map[type], callback);
-            this.listeners.push(listener)
+            this.listeners.push(listener);
             return listener;
         } else {
             throw "No registered type: " + type;
         }
+    }
+
+    removeListener(type) {
+        if (map[type]) {
+            for (var i = 0; i < this.listeners.length; i++) {
+                var listener = this.listeners[i];
+                if (listener.eventType === map[type]) {
+                    listener.remove();
+                    var index = this.listeners.indexOf(listener);
+                    if (index > -1) {
+                        this.listeners.splice(index, 1);
+                    }
+                    LOG(`Event listener of type "${type}" removed`);
+                }
+            }
+        }
+    }
+
+    removeListeners() {
+        for (var i = 0; i < this.listeners.length; i++) {
+            this.listeners[i].remove();
+        }
+        this.listeners = [];
+        LOG('All event listeners removed');
     }
 
     trustHosts(hosts){
@@ -91,7 +109,7 @@ class XMPP {
     }
 
     message(text, user, thread = null){
-        LOG("Message:"+text+" being sent to user: "+user);
+        LOG(`Message: "${text}" being sent to user: ${user}`);
         React.NativeModules.RNXMPP.message(text, user, thread);
     }
 
