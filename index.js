@@ -23,11 +23,19 @@ class XMPP {
     constructor(){
         this.isConnected = false;
         this.isLogged = false;
-        NativeAppEventEmitter.addListener(map.connect, this.onConnected.bind(this));
-        NativeAppEventEmitter.addListener(map.disconnect, this.onDisconnected.bind(this));
-        NativeAppEventEmitter.addListener(map.error, this.onError.bind(this));
-        NativeAppEventEmitter.addListener(map.loginError, this.onLoginError.bind(this));
-        NativeAppEventEmitter.addListener(map.login, this.onLogin.bind(this));
+        this.listeners = [
+            NativeAppEventEmitter.addListener(map.connect, this.onConnected.bind(this)),
+            NativeAppEventEmitter.addListener(map.disconnect, this.onDisconnected.bind(this)),
+            NativeAppEventEmitter.addListener(map.error, this.onError.bind(this)),
+            NativeAppEventEmitter.addListener(map.loginError, this.onLoginError.bind(this)),
+            NativeAppEventEmitter.addListener(map.login, this.onLogin.bind(this)),
+        ];
+    }
+
+    componentWillUnmount() {
+        for (var i = 0; i < this.listeners.length; i++) {
+            this.listeners[i].remove();
+        }
     }
 
     onConnected(){
@@ -57,8 +65,9 @@ class XMPP {
 
     on(type, callback){
         if (map[type]){
-            return NativeAppEventEmitter.addListener(
-                map[type],callback);
+            const listener = NativeAppEventEmitter.addListener(map[type], callback);
+            this.listeners.push(listener)
+            return listener;
         } else {
             throw "No registered type: " + type;
         }
