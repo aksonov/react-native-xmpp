@@ -152,6 +152,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppReconnect         activate:xmppStream];
     [xmppRoster            activate:xmppStream];
     [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+    xmppStreamManagentStorage = [[XMPPStreamManagementMemoryStorage alloc] init];
+    xmppStreamManagement = [[XMPPStreamManagement alloc] initWithStorage:xmppStreamManagentStorage];
+    [xmppStreamManagement activate:xmppStream];
+    xmppStreamManagement.autoResume = YES;
+    [xmppStreamManagement addDelegate:self  delegateQueue:dispatch_get_main_queue()];
+    
 //    [xmppvCardTempModule   activate:xmppStream];
 //    [xmppvCardAvatarModule activate:xmppStream];
 //    [xmppCapabilities      activate:xmppStream];
@@ -424,6 +431,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    if ([xmppStream supportsStreamManagement]){
+        [xmppStreamManagement enableStreamManagementWithResumption:YES maxTimeout:0];
+        [xmppStreamManagement automaticallyRequestAcksAfterStanzaCount:1 orTimeout:0];
+    }
 
     [self goOnline];
     [self.delegate onLogin:username password:password];

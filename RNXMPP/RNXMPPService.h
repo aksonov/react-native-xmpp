@@ -17,6 +17,8 @@
 #import "XMPPRoster.h"
 #import "XMPPRosterMemoryStorage.h"
 #import "RNXMPPConstants.h"
+#import "XMPPStreamManagement.h"
+#import "XMPPStreamManagementMemoryStorage.h"
 
 @protocol RNXMPPServiceDelegate <NSObject>
 
@@ -38,6 +40,8 @@
     XMPPRoster *xmppRoster;
     XMPPRosterMemoryStorage *xmppRosterStorage;
     XMPPReconnect *xmppReconnect;
+    XMPPStreamManagement *xmppStreamManagement;
+    id<XMPPStreamManagementStorage> xmppStreamManagentStorage;
     XMPPMUC *xmppMUC;
     NSArray *trustedHosts;
     NSString *username;

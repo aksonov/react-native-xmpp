@@ -60,7 +60,11 @@ RCT_EXPORT_MODULE();
                 [res[child.name] addObject:[self contentOf:child]];
             } else {
                 if ([child.name isEqualToString:@"text"]){
-                    return [self contentOf:child];
+                    if ([res count]){
+                        res[@"#text"] = [self contentOf:child];
+                    } else {
+                        return [self contentOf:child];
+                    }
                 } else {
                     res[child.name] = [self contentOf:child];
                 }
