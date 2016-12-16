@@ -23,7 +23,7 @@ RCT_ENUM_CONVERTER(AuthMethod, (@{ PLAIN_AUTH : @(Plain),
                                           SCRAM, integerValue)
 @end
 
-
+                   
 @implementation RNXMPP {
     RCTResponseSenderBlock onError;
     RCTResponseSenderBlock onConnect;
@@ -109,19 +109,15 @@ RCT_EXPORT_MODULE();
     [self.bridge.eventDispatcher sendAppEventWithName:@"RNXMPPLogin" body:@{@"username":username, @"password":password}];
 }
 
-RCT_EXPORT_METHOD(trustHosts:(NSArray *)hosts){
+
+RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password auth:(AuthMethod) auth){
     [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] trustHosts:hosts];
+    [[RNXMPPService sharedInstance] connect:jid withPassword:password auth:auth];
 }
 
-RCT_EXPORT_METHOD(connect:(NSString *)jid password:(NSString *)password auth:(AuthMethod) auth hostname:(NSString *)hostname port:(int)port){
+RCT_EXPORT_METHOD(message:(NSString *)text to:(NSString *)to){
     [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] connect:jid withPassword:password auth:auth hostname:hostname port:port];
-}
-
-RCT_EXPORT_METHOD(message:(NSString *)text to:(NSString *)to thread:(NSString *)threadId){
-    [RNXMPPService sharedInstance].delegate = self;
-    [[RNXMPPService sharedInstance] sendMessage:text to:to thread:threadId];
+    [[RNXMPPService sharedInstance] sendMessage:text to:to];
 }
 
 RCT_EXPORT_METHOD(presence:(NSString *)to type:(NSString *)type){

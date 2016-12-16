@@ -17,6 +17,8 @@
 #import "XMPPRoster.h"
 #import "XMPPRosterMemoryStorage.h"
 #import "RNXMPPConstants.h"
+#import "XMPPStreamManagement.h"
+#import "XMPPStreamManagementMemoryStorage.h"
 
 @protocol RNXMPPServiceDelegate <NSObject>
 
@@ -37,9 +39,10 @@
     XMPPStream *xmppStream;
     XMPPRoster *xmppRoster;
     XMPPRosterMemoryStorage *xmppRosterStorage;
+    XMPPStreamManagement *xmppStreamManagement;
+    id<XMPPStreamManagementStorage> xmppStreamManagentStorage;
     XMPPReconnect *xmppReconnect;
     XMPPMUC *xmppMUC;
-    NSArray *trustedHosts;
     NSString *username;
     NSString *password;
     AuthMethod authMethod;
@@ -52,10 +55,9 @@
 @property (nonatomic, weak) id<RNXMPPServiceDelegate> delegate;
 
 +(RNXMPPService *) sharedInstance;
-- (void)trustHosts:(NSArray *)hosts;
-- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth hostname:(NSString *)hostname port:(int)port;
+- (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth;
 - (void)disconnect;
-- (void)sendMessage:(NSString *)text to:(NSString *)username thread:(NSString *)thread;
+- (void)sendMessage:(NSString *)text to:(NSString *)username;
 - (void)sendPresence:(NSString *)to type:(NSString *)type;
 - (void)removeRoster:(NSString *)to;
 -(void)fetchRoster;
