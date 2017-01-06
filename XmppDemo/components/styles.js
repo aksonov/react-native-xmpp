@@ -1,7 +1,6 @@
-'use strict';
-var React = require('react-native');
-var {StyleSheet, PixelRatio, Platform} = React;
-var styles = StyleSheet.create({
+import React from 'react';
+import  {StyleSheet, PixelRatio, Platform} from 'react-native';
+const styles = StyleSheet.create({
     container: {
         flex:1,
         paddingTop: 70,
@@ -106,6 +105,4 @@ var styles = StyleSheet.create({
     }
 
 });
-
-
-module.exports = styles;
+export default styles;

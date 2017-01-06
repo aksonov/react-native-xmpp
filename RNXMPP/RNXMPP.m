@@ -7,9 +7,6 @@
 //
 
 #import "RNXMPP.h"
-#import "RCTBridge.h"
-#import "RCTEventDispatcher.h"
-#import "RCTConvert.h"
 #import "RNXMPPConstants.h"
 
 const NSString *PLAIN_AUTH = @"PLAIN";
