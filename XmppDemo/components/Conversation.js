@@ -2,13 +2,13 @@ import React from 'react';
 import {View, Text, ScrollView, TextInput, Keyboard, ListView, Dimensions}  from 'react-native';
 import styles from './styles';
 const height = Dimensions.get('window').height;
-var Button = require('react-native-button');
-var {Actions} = require('react-native-router-flux');
-var InvertibleScrollView = require('react-native-invertible-scroll-view');
+import Button from 'react-native-button';
+import {Actions} from 'react-native-router-flux';
+import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import xmpp from '../stores/XmppStore';
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-class Conversation extends React.Component {
+export default class Conversation extends React.Component {
     static title(props){
         return xmpp.remote;
     }
@@ -65,5 +65,3 @@ class Conversation extends React.Component {
         )
     }
 }
-
-module.exports = Conversation;
