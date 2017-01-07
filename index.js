@@ -113,6 +113,10 @@ class XMPP {
         React.NativeModules.RNXMPP.message(text, user, thread);
     }
 
+    editProfile(params, avatar){
+        RNXMPP.editProfile(params, avatar);
+    }
+
     sendStanza(stanza){
         RNXMPP.sendStanza(stanza);
     }

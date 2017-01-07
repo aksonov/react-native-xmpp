@@ -150,6 +150,11 @@ RCT_EXPORT_METHOD(sendStanza:(NSString *)stanza){
     [[RNXMPPService sharedInstance] sendStanza:stanza];
 }
 
+RCT_EXPORT_METHOD(editProfile:(NSDictionary *)params avatar:(NSString *)avatar){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] editProfile:params avatar:avatar];
+}
+
 - (NSDictionary *)constantsToExport
 {
     return @{ PLAIN_AUTH : @(Plain),
