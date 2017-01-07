@@ -150,6 +150,16 @@ RCT_EXPORT_METHOD(sendStanza:(NSString *)stanza){
     [[RNXMPPService sharedInstance] sendStanza:stanza];
 }
 
+RCT_EXPORT_METHOD(editVCard:(NSDictionary *)params){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] editVCard:params];
+}
+
+RCT_EXPORT_METHOD(getVCard:(NSString *)jid){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] getVCard:jid];
+}
+
 - (NSDictionary *)constantsToExport
 {
     return @{ PLAIN_AUTH : @(Plain),

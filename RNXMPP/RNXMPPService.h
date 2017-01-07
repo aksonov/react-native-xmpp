@@ -64,6 +64,8 @@
 - (void)removeRoster:(NSString *)to;
 -(void)fetchRoster;
 -(void)sendStanza:(NSString *)stanza;
+- (void)editVCard:(NSDictionary *)params;
+- (void)getVCard:(NSString *)JID;
 
 @end
 

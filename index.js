@@ -113,6 +113,14 @@ class XMPP {
         React.NativeModules.RNXMPP.message(text, user, thread);
     }
 
+    editVCard(params){
+        RNXMPP.editVCard(params);
+    }
+
+    getVCard(id){
+        RNXMPP.getVCard(id);
+    }
+
     sendStanza(stanza){
         RNXMPP.sendStanza(stanza);
     }
