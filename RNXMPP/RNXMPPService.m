@@ -60,7 +60,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)setupStream
 {
-    [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:ddLogLevel];
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:ddLogLevel];
     NSAssert(xmppStream == nil, @"Method setupStream invoked multiple times");
 
     // Setup xmpp stream
