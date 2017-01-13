@@ -2,6 +2,7 @@
 var React = require('react-native');
 var {NativeAppEventEmitter, NativeModules} = React;
 var RNXMPP = NativeModules.RNXMPP;
+console.log("RNXMPP:", RNXMPP);
 
 var map = {
     'message' : 'RNXMPPMessage',
