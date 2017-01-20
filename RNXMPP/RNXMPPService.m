@@ -5,16 +5,16 @@
 #import "XMPPLogging.h"
 #import "XMPPReconnect.h"
 #import "XMPPUser.h"
-#import "DDLog.h"
+#import <CocoaLumberjack/DDLog.h>
 #import "DDTTYLogger.h"
 #import <CFNetwork/CFNetwork.h>
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
-static const int ddLogLevel = XMPP_LOG_FLAG_SEND_RECV;//LOG_LEVEL_VERBOSE;
+static DDLogLevel ddLogLevel = DDLogLevelVerbose;
 //static const int ddLogLevel = LOG_LEVEL_INFO;
 #else
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static DDLogLevel ddLogLevel = DDLogLevelInfo;
 #endif
 
 @interface RNXMPPService(){

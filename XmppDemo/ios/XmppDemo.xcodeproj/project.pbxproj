@@ -26,6 +26,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		876B5E651E1FF5D100E48F34 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 876B5E641E1FF5D100E48F34 /* libxml2.2.tbd */; };
 		876B5E671E1FF5D700E48F34 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 876B5E661E1FF5D700E48F34 /* libresolv.tbd */; };
+		D52F6920172189C75DDB39CD /* libPods-XmppDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57278C132036A2A977304505 /* libPods-XmppDemo.a */; };
 		E2E2E1DAD9F9408BAAE92B01 /* libRNXMPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B6FC73555441098BF3C26D /* libRNXMPP.a */; };
 /* End PBXBuildFile section */
 
@@ -212,13 +213,6 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		876B5E561E1FF4F000E48F34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 40780E9ACE1D405384A431E2 /* RNXMPP.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 873769951B7CD6E900F7C3C2;
-			remoteInfo = RNXMPP;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -241,12 +235,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = XmppDemo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = XmppDemo/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		40780E9ACE1D405384A431E2 /* RNXMPP.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNXMPP.xcodeproj; path = "../node_modules/react-native-xmpp/RNXMPP.xcodeproj"; sourceTree = "<group>"; };
+		3318308903BCF39C5A564615 /* Pods-XmppDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XmppDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-XmppDemo/Pods-XmppDemo.release.xcconfig"; sourceTree = "<group>"; };
+		57278C132036A2A977304505 /* libPods-XmppDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XmppDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		876B5E641E1FF5D100E48F34 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		876B5E661E1FF5D700E48F34 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		943E6B780815E3819EC4E4D3 /* Pods-XmppDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XmppDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XmppDemo/Pods-XmppDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C5B6FC73555441098BF3C26D /* libRNXMPP.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNXMPP.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,6 +273,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				E2E2E1DAD9F9408BAAE92B01 /* libRNXMPP.a in Frameworks */,
+				D52F6920172189C75DDB39CD /* libPods-XmppDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +386,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		570E66D071A20C9B8C0CF745 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				943E6B780815E3819EC4E4D3 /* Pods-XmppDemo.debug.xcconfig */,
+				3318308903BCF39C5A564615 /* Pods-XmppDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,7 +427,6 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				40780E9ACE1D405384A431E2 /* RNXMPP.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -443,6 +448,7 @@
 				00E356EF1AD99517003FC87E /* XmppDemoTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				876B5E631E1FF5D000E48F34 /* Frameworks */,
+				570E66D071A20C9B8C0CF745 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -457,19 +463,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		876B5E3A1E1FF4F000E48F34 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				876B5E571E1FF4F000E48F34 /* libRNXMPP.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		876B5E631E1FF5D000E48F34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				876B5E661E1FF5D700E48F34 /* libresolv.tbd */,
 				876B5E641E1FF5D100E48F34 /* libxml2.2.tbd */,
+				57278C132036A2A977304505 /* libPods-XmppDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -499,10 +498,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "XmppDemo" */;
 			buildPhases = (
+				A015A83D8F74C9448EE5BC8A /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				8143D99DE02D4B2207F170EF /* [CP] Embed Pods Frameworks */,
+				9692E24EAC6A16177904787C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -583,10 +585,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = 876B5E3A1E1FF4F000E48F34 /* Products */;
-					ProjectRef = 40780E9ACE1D405384A431E2 /* RNXMPP.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -773,13 +771,6 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		876B5E571E1FF4F000E48F34 /* libRNXMPP.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNXMPP.a;
-			remoteRef = 876B5E561E1FF4F000E48F34 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -815,6 +806,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		8143D99DE02D4B2207F170EF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XmppDemo/Pods-XmppDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9692E24EAC6A16177904787C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XmppDemo/Pods-XmppDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A015A83D8F74C9448EE5BC8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -898,6 +934,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 943E6B780815E3819EC4E4D3 /* Pods-XmppDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -916,6 +953,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3318308903BCF39C5A564615 /* Pods-XmppDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
