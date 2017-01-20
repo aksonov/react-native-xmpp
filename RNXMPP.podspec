@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
   
   s.dependency 'React'
   s.dependency 'XMPPFramework'
-  s.dependency 'CocoaLumberjack'
   s.preserve_paths      = 'package.json', 'index.js'
   s.source_files        = 'RNXMPP/XMPPFramework.h', 'RNXMPP/RNXMPPService.m', 'RNXMPP/RNXMPPService.h', 'RNXMPP/RNXMPPConstants.h', 'RNXMPP/RNXMPPConstants.m', 'RNXMPP/RNXMPP.h', 'RNXMPP/RNXMPP.m'
 end
