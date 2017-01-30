@@ -432,7 +432,7 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if ([xmppStream supportsStreamManagement]){
-        [xmppStreamManagement enableStreamManagementWithResumption:YES maxTimeout:0];
+        [xmppStreamManagement enableStreamManagementWithResumption:YES maxTimeout:600];
         [xmppStreamManagement automaticallyRequestAcksAfterStanzaCount:1 orTimeout:0];
     }
 
