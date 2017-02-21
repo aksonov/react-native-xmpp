@@ -6,9 +6,7 @@ Pod::Spec.new do |s|
   s.name                = 'RNXMPP'
   s.version             = package['version']
   s.summary             = package['description']
-  s.description         = <<-DESC
-    RNXMPP implementation
-  DESC
+  s.description         = package['description']
   s.homepage            = package['homepage']
   s.license             = package['license']
   s.author              = package['author']
