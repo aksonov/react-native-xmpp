@@ -275,16 +275,27 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
     }
 
     NSError *error = nil;
-    if (![xmppStream connectWithTimeout:30 error:&error])
-    {
-        DDLogError(@"Error connecting: %@", error);
-        if (self.delegate){
-            [self.delegate onLoginError:error];
+    if (port == 5223){
+        if (![xmppStream oldSchoolSecureConnectWithTimeout:30 error:&error])
+        {
+            DDLogError(@"Error connecting: %@", error);
+            if (self.delegate){
+                [self.delegate onLoginError:error];
+            }
+            
+            return NO;
         }
-
-        return NO;
+    } else {
+        if (![xmppStream connectWithTimeout:30 error:&error])
+        {
+            DDLogError(@"Error connecting: %@", error);
+            if (self.delegate){
+                [self.delegate onLoginError:error];
+            }
+            
+            return NO;
+        }
     }
-
     return YES;
 }
 
@@ -307,12 +318,12 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
-    NSString *expectedCertName = [xmppStream.myJID domain];
+    NSString *expectedCertName = [xmppStream hostName];
     if (expectedCertName)
     {
         settings[(NSString *) kCFStreamSSLPeerName] = expectedCertName;
     }
-
+    
     if (customCertEvaluation)
     {
         settings[GCDAsyncSocketManuallyEvaluateTrust] = @(YES);

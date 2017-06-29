@@ -1,6 +1,6 @@
 {
   "name": "react-native-xmpp",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "homepage": "http://aksonov.com",
   "description": "XMPP Library for React Native",
   "main": "index.js",
