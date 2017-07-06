@@ -30,6 +30,10 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    all*.exclude group: 'xpp3', module: 'xpp3'
+}
+
 dependencies {
     compile "com.facebook.react:react-native:+"
     compile "org.igniterealtime.smack:smack-android:4.1.0"
