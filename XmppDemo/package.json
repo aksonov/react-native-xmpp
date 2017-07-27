@@ -14,7 +14,7 @@
     "react-native-button": "^1.2.1",
     "react-native-invertible-scroll-view": "^1.0.0",
     "react-native-mobx": "^0.3.1",
-    "react-native-router-flux": "^3.31.0",
+    "react-native-router-flux": "^3.38.0",
     "react-native-xmpp": "^0.5.0"
   },
   "devDependencies": {
