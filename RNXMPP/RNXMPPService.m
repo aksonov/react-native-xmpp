@@ -276,6 +276,7 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 
     NSError *error = nil;
     if (port == 5223) {
+        self.xmppReconnect.usesOldSchoolSecureConnect = YES;
         if (![xmppStream oldSchoolSecureConnectWithTimeout:30 error:&error])
         {
             DDLogError(@"Error connecting: %@", error);
