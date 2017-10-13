@@ -49,4 +49,47 @@ XMPP.removeListener(TYPE);
 
 1. `npm install react-native-xmpp --save`
 2. `rnpm link react-native-xmpp`
-3. In the Xcode project navigator, select your project, select the `Build Phases` tab and in the `Link Binary With Libraries` section add, **`libRNXMPP.a`**, **`libresolv`** and **`libxml2`**.
+
+### iOS
+
+In the Xcode project navigator, select your project, select the `Build Phases` tab and in the `Link Binary With Libraries` section add, **`libRNXMPP.a`**, **`libresolv`** and **`libxml2`**.
+
+### Android
+
+If rnpm doesn't link the react-native-xmpp correct:
+
+**android/settings.gradle**
+
+```gradle
+include ':react-native-xmpp'
+project(':react-native-xmpp').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-xmpp/android')
+```
+
+**android/app/build.gradle**
+
+```gradle
+dependencies {
+   ...
+   compile project(':react-native-xmpp')
+}
+```
+
+**MainApplication.java**
+
+On top, where imports are:
+
+```java
+import rnxmpp.RNXMPPPackage;
+```
+
+Add the `ReactVideoPackage` class to your list of exported packages.
+
+```java
+@Override
+protected List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+        new MainReactPackage(),
+        new RNXMPPPackage()
+    );
+}
+```
