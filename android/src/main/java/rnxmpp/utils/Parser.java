@@ -65,12 +65,11 @@ public class Parser {
                     childArray.pushMap(Arguments.fromBundle(Arguments.toBundle(writableMap.getMap(childNode.getNodeName()))));
                     childArray.pushMap(parse(childNode));
                     writableMap.putArray(childNode.getNodeName(), childArray);
-                }
-                if (writableMap.hasKey(childNode.getNodeName())){
+                } else if (writableMap.hasKey(childNode.getNodeName()) && writableMap.getType(childNode.getNodeName()).equals(ReadableType.Array)){
                     WritableArray writableArray = fromArray(writableMap.getArray(childNode.getNodeName()));
                     writableArray.pushMap(parse(childNode));
                     writableMap.putArray(childNode.getNodeName(), writableArray);
-                }else{
+                } else {
                     NodeList checkTextChildNodes = childNode.getChildNodes();
                     if (checkTextChildNodes.getLength() == 1 && checkTextChildNodes.item(0).getNodeName().equals("#text")){
                         writableMap.putString(childNode.getNodeName(), checkTextChildNodes.item(0).getNodeValue());
