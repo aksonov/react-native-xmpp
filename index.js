@@ -93,7 +93,15 @@ class XMPP {
         for (var i = 0; i < this.listeners.length; i++) {
             this.listeners[i].remove();
         }
-        this.listeners = [];
+
+        this.listeners = this.listeners = [
+            NativeAppEventEmitter.addListener(map.connect, this.onConnected),
+            NativeAppEventEmitter.addListener(map.disconnect, this.onDisconnected),
+            NativeAppEventEmitter.addListener(map.error, this.onError),
+            NativeAppEventEmitter.addListener(map.loginError, this.onLoginError),
+            NativeAppEventEmitter.addListener(map.login, this.onLogin),
+        ];
+        
         LOG('All event listeners removed');
     }
 
