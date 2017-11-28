@@ -169,6 +169,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
     @Override
     public void disconnect() {
         connection.disconnect();
+        xmppServiceListener.onDisconnect(null);
     }
 
     @Override
