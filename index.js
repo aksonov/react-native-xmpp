@@ -94,7 +94,7 @@ class XMPP {
             this.listeners[i].remove();
         }
 
-        this.listeners = this.listeners = [
+        this.listeners = [
             NativeAppEventEmitter.addListener(map.connect, this.onConnected),
             NativeAppEventEmitter.addListener(map.disconnect, this.onDisconnected),
             NativeAppEventEmitter.addListener(map.error, this.onError),
