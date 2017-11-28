@@ -140,6 +140,11 @@ RCT_EXPORT_METHOD(disconnect){
     [[RNXMPPService sharedInstance] disconnect];
 }
 
+RCT_EXPORT_METHOD(disconnectAfterSending){
+    [RNXMPPService sharedInstance].delegate = self;
+    [[RNXMPPService sharedInstance] disconnectAfterSending];
+}
+
 RCT_EXPORT_METHOD(fetchRoster){
     [RNXMPPService sharedInstance].delegate = self;
     [[RNXMPPService sharedInstance] fetchRoster];

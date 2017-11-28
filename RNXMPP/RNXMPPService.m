@@ -5,16 +5,16 @@
 #import "XMPPLogging.h"
 #import "XMPPReconnect.h"
 #import "XMPPUser.h"
-#import "DDLog.h"
+#import <CocoaLumberjack/DDLog.h>
 #import "DDTTYLogger.h"
 #import <CFNetwork/CFNetwork.h>
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
-static const int ddLogLevel = XMPP_LOG_FLAG_SEND_RECV;//LOG_LEVEL_VERBOSE;
+static DDLogLevel ddLogLevel = DDLogLevelVerbose;
 //static const int ddLogLevel = LOG_LEVEL_INFO;
 #else
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static DDLogLevel ddLogLevel = DDLogLevelInfo;
 #endif
 
 @interface RNXMPPService(){
@@ -60,7 +60,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)setupStream
 {
-    [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:ddLogLevel];
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:ddLogLevel];
     NSAssert(xmppStream == nil, @"Method setupStream invoked multiple times");
 
     // Setup xmpp stream
@@ -275,14 +275,27 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 
     NSError *error = nil;
-    if (![xmppStream connectWithTimeout:30 error:&error])
-    {
-        DDLogError(@"Error connecting: %@", error);
-        if (self.delegate){
-            [self.delegate onLoginError:error];
+    if (port == 5223) {
+        self.xmppReconnect.usesOldSchoolSecureConnect = YES;
+        if (![xmppStream oldSchoolSecureConnectWithTimeout:30 error:&error])
+        {
+            DDLogError(@"Error connecting: %@", error);
+            if (self.delegate){
+                [self.delegate onLoginError:error];
+            }
+            
+            return NO;
         }
-
-        return NO;
+    } else {
+        if (![xmppStream connectWithTimeout:30 error:&error])
+        {
+            DDLogError(@"Error connecting: %@", error);
+            if (self.delegate){
+                [self.delegate onLoginError:error];
+            }
+            
+            return NO;
+        }
     }
 
     return YES;
@@ -292,6 +305,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [self goOffline];
     [xmppStream disconnect];
+}
+
+- (void)disconnectAfterSending
+{
+    [self goOffline];
+    [xmppStream disconnectAfterSending];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -307,7 +326,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
-    NSString *expectedCertName = [xmppStream.myJID domain];
+    NSString *expectedCertName = [xmppStream hostName];
     if (expectedCertName)
     {
         settings[(NSString *) kCFStreamSSLPeerName] = expectedCertName;
@@ -432,7 +451,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if ([xmppStream supportsStreamManagement]){
-        [xmppStreamManagement enableStreamManagementWithResumption:YES maxTimeout:0];
+        [xmppStreamManagement enableStreamManagementWithResumption:YES maxTimeout:600];
         [xmppStreamManagement automaticallyRequestAcksAfterStanzaCount:1 orTimeout:0];
     }
 

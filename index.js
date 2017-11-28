@@ -134,6 +134,11 @@ class XMPP {
             React.NativeModules.RNXMPP.disconnect();
         }
     }
+    disconnectAfterSending(){
+      if (this.isConnected){
+        React.NativeModules.RNXMPP.disconnectAfterSending();
+      }
+    }
 }
 
 module.exports = new XMPP();

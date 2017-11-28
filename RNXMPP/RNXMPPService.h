@@ -59,6 +59,7 @@
 - (void)trustHosts:(NSArray *)hosts;
 - (BOOL)connect:(NSString *)myJID withPassword:(NSString *)myPassword auth:(AuthMethod)auth hostname:(NSString *)hostname port:(int)port;
 - (void)disconnect;
+- (void)disconnectAfterSending;
 - (void)sendMessage:(NSString *)text to:(NSString *)username thread:(NSString *)thread;
 - (void)sendPresence:(NSString *)to type:(NSString *)type;
 - (void)removeRoster:(NSString *)to;
