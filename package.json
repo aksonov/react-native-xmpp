@@ -1,7 +1,8 @@
 {
   "name": "react-native-xmpp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "XMPP Library for React Native",
+  "homepage":"https://github.com/aksonov/react-native-xmpp",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
