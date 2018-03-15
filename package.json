@@ -1,6 +1,7 @@
 {
   "name": "react-native-xmpp",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.1",
+  "homepage": "http://hippware.com",
   "description": "XMPP Library for React Native",
   "main": "index.js",
   "scripts": {

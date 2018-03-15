@@ -303,7 +303,6 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 
 - (void)disconnect
 {
-    [self goOffline];
     [xmppStream disconnect];
 }
 
