@@ -95,11 +95,11 @@ class XMPP {
         }
 
         this.listeners = [
-            NativeAppEventEmitter.addListener(map.connect, this.onConnected),
-            NativeAppEventEmitter.addListener(map.disconnect, this.onDisconnected),
-            NativeAppEventEmitter.addListener(map.error, this.onError),
-            NativeAppEventEmitter.addListener(map.loginError, this.onLoginError),
-            NativeAppEventEmitter.addListener(map.login, this.onLogin),
+            NativeAppEventEmitter.addListener(map.connect, this.onConnected.bind(this)),
+            NativeAppEventEmitter.addListener(map.disconnect, this.onDisconnected.bind(this)),
+            NativeAppEventEmitter.addListener(map.error, this.onError.bind(this)),
+            NativeAppEventEmitter.addListener(map.loginError, this.onLoginError.bind(this)),
+            NativeAppEventEmitter.addListener(map.login, this.onLogin.bind(this)),
         ];
         
         LOG('All event listeners removed');
