@@ -48,15 +48,27 @@ XMPP.removeListener(TYPE);
 ## Getting started
 
 1. `npm install react-native-xmpp --save`
-2. `rnpm link react-native-xmpp`
 
 ### iOS
 
-In the Xcode project navigator, select your project, select the `Build Phases` tab and in the `Link Binary With Libraries` section add, **`libRNXMPP.a`**, **`libresolv`** and **`libxml2`**.
+Please use CocoaPods 
+
+2. Install latest XMPPFramework:
+https://github.com/robbiehanson/XMPPFramework
+`pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'`
+
+3. Add this package pod:
+`pod 'RNXMPP', :path => '../node_modules/react-native-xmpp'`
+
+If you have problems with latest 4.0 XMPPFramework and/or XCode 9.3, you may use old one with forked KissXML:
+`pod 'XMPPFramework', '~> 3.7.0'`
+`pod 'KissXML', :git => "https://github.com/aksonov/KissXML.git", :branch => '5.1.4'`
+
 
 ### Android
+`react-native link react-native-xmpp`
 
-If rnpm doesn't link the react-native-xmpp correct:
+If it doesn't link the react-native-xmpp correct:
 
 **android/settings.gradle**
 
