@@ -5,6 +5,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 
+import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.jivesoftware.smackx.muc.MultiUserChatManager;
+
 import java.util.logging.Logger;
 
 import rnxmpp.service.RNXMPPCommunicationBridge;
@@ -40,6 +43,21 @@ public class RNXMPPModule extends ReactContextBaseJavaModule implements rnxmpp.s
     @ReactMethod
     public void connect(String jid, String password, String authMethod, String hostname, Integer port){
         this.xmppService.connect(jid, password, authMethod, hostname, port);
+    }
+
+    @ReactMethod
+    public void joinRoom(String mucJid, String userNickname) {
+        this.xmppService.joinRoom(mucJid, userNickname);
+    }
+
+    @ReactMethod
+    public void sendRoomMessage(String mucJid, String text) {
+        this.xmppService.sendRoomMessage(mucJid, text);
+    }
+
+    @ReactMethod
+    public void leaveRoom(String mucJid) {
+        this.xmppService.leaveRoom(mucJid);
     }
 
     @Override

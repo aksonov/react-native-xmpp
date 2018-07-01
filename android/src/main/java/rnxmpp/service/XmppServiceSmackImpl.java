@@ -25,16 +25,23 @@ import org.jivesoftware.smack.sasl.SASLErrorException;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smack.util.XmlStringBuilder;
+import org.jivesoftware.smack.util.TLSUtils;
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
+import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.jivesoftware.smackx.muc.MultiUserChatManager;
+import org.jivesoftware.smackx.muc.DiscussionHistory;
 
 import android.os.AsyncTask;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import rnxmpp.ssl.UnsafeSSLContext;
 
 
 /**
@@ -45,6 +52,7 @@ import rnxmpp.ssl.UnsafeSSLContext;
 public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, StanzaListener, ConnectionListener, ChatMessageListener, RosterLoadedListener {
     XmppServiceListener xmppServiceListener;
     Logger logger = Logger.getLogger(XmppServiceSmackImpl.class.getName());
+    XmppGroupMessageListenerImpl groupMessageListner;
 
     XMPPTCPConnection connection;
     Roster roster;
@@ -72,7 +80,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
                 .setServiceName(serviceName)
                 .setUsernameAndPassword(jidParts[0], password)
                 .setConnectTimeout(3000)
-                //.setDebuggerEnabled(true)
+                // .setDebuggerEnabled(true)
                 .setSecurityMode(ConnectionConfiguration.SecurityMode.required);
 
         if (serviceNameParts.length>1){
@@ -87,7 +95,13 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
             confBuilder.setPort(port);
         }
         if (trustedHosts.contains(hostname) || (hostname == null && trustedHosts.contains(serviceName))){
-            confBuilder.setCustomSSLContext(UnsafeSSLContext.INSTANCE.getContext());
+            confBuilder.setSecurityMode(SecurityMode.disabled);
+            TLSUtils.disableHostnameVerificationForTlsCertificicates(confBuilder);
+            try {
+                TLSUtils.acceptAllCertificates(confBuilder);
+            } catch (NoSuchAlgorithmException | KeyManagementException e) {
+                e.printStackTrace();
+            }
         }
         XMPPTCPConnectionConfiguration connectionConfiguration = confBuilder.build();
         connection = new XMPPTCPConnection(connectionConfiguration);
@@ -122,6 +136,45 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
             }
         }.execute();
+    }
+
+
+    public void joinRoom(String roomJid, String userNickname) {
+        MultiUserChatManager manager = MultiUserChatManager.getInstanceFor(connection);
+        MultiUserChat muc = manager.getMultiUserChat(roomJid);
+        try {
+            DiscussionHistory history = new DiscussionHistory();
+            history.setMaxStanzas(0);
+            muc.join(userNickname, "", history, connection.getPacketReplyTimeout());
+            groupMessageListner = new XmppGroupMessageListenerImpl(this.xmppServiceListener, logger);
+            muc.addMessageListener(groupMessageListner);
+        } catch (SmackException.NotConnectedException | XMPPException.XMPPErrorException | SmackException.NoResponseException e) {
+            logger.log(Level.WARNING, "Could not join chat room", e);
+        }
+    }
+
+    public void sendRoomMessage(String roomJid, String text) {
+
+        MultiUserChatManager mucManager = MultiUserChatManager.getInstanceFor(connection);
+        MultiUserChat muc = mucManager.getMultiUserChat(roomJid);
+
+        try {
+            muc.sendMessage(text);
+        } catch (SmackException e) {
+            logger.log(Level.WARNING, "Could not send group message", e);
+        }
+    }
+
+    public void leaveRoom(String roomJid) {
+        MultiUserChatManager mucManager = MultiUserChatManager.getInstanceFor(connection);
+        MultiUserChat muc = mucManager.getMultiUserChat(roomJid);
+
+        try {
+            muc.leave();
+            muc.removeMessageListener(groupMessageListner);
+        } catch (SmackException e) {
+            logger.log(Level.WARNING, "Could not leave chat room", e);
+        }
     }
 
     @Override
@@ -236,6 +289,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
     @Override
     public void processMessage(Chat chat, Message message) {
         this.xmppServiceListener.onMessage(message);
+        // logger.log(Level.INFO, "Received a new message", message.toString());
     }
 
     @Override

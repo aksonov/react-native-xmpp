@@ -37,6 +37,7 @@
 @interface RNXMPPService : NSObject
 {
     XMPPStream *xmppStream;
+    XMPPRoom *xmppRoom;
     XMPPRoster *xmppRoster;
     XMPPRosterMemoryStorage *xmppRosterStorage;
     XMPPReconnect *xmppReconnect;
@@ -54,6 +55,8 @@
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
 @property (nonatomic, strong, readonly) XMPPReconnect *xmppReconnect;
 @property (nonatomic, weak) id<RNXMPPServiceDelegate> delegate;
+@property (nonatomic) XMPPRoom *xmppRoom;
+@property (nonatomic) NSMutableDictionary *xmppRooms;
 
 +(RNXMPPService *) sharedInstance;
 - (void)trustHosts:(NSArray *)hosts;
@@ -63,8 +66,11 @@
 - (void)sendMessage:(NSString *)text to:(NSString *)username thread:(NSString *)thread;
 - (void)sendPresence:(NSString *)to type:(NSString *)type;
 - (void)removeRoster:(NSString *)to;
--(void)fetchRoster;
--(void)sendStanza:(NSString *)stanza;
+- (void)fetchRoster;
+- (void)sendStanza:(NSString *)stanza;
+- (void)joinRoom:(NSString *)roomJID nickName:(NSString *)nickname;
+- (void)sendRoomMessage:(NSString *)roomJID message:(NSString *)message;
+- (void)leaveRoom:(NSString *)roomJID;
 
 @end
 

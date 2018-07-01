@@ -17,6 +17,8 @@ import org.jivesoftware.smack.roster.RosterGroup;
 
 import rnxmpp.utils.Parser;
 
+
+
 /**
  * Created by Kristian Frølund on 7/19/16.
  * Copyright (c) 2016. Teletronics. All rights reserved
