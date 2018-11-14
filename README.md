@@ -13,35 +13,42 @@ XmppDemo uses a Flux approach (check its `XmppStore`) to communicate with a samp
 ## Example
 
 ```js
-var XMPP = require('react-native-xmpp');
+var XMPP = require("react-native-xmpp");
 
 // optional callbacks
-XMPP.on('message', (message) => console.log('MESSAGE:' + JSON.stringify(message)));
-XMPP.on('iq', (message) => console.log('IQ:' + JSON.stringify(message)));
-XMPP.on('presence', (message) => console.log('PRESENCE:' + JSON.stringify(message)));
-XMPP.on('error', (message) => console.log('ERROR:' + message));
-XMPP.on('loginError', (message) => console.log('LOGIN ERROR:' + message));
-XMPP.on('login', (message) => console.log('LOGGED!'));
-XMPP.on('connect', (message) => console.log('CONNECTED!'));
-XMPP.on('disconnect', (message) => console.log('DISCONNECTED!'));
+XMPP.on("message", message =>
+  console.log("MESSAGE:" + JSON.stringify(message))
+);
+XMPP.on("iq", message => console.log("IQ:" + JSON.stringify(message)));
+XMPP.on("presence", message =>
+  console.log("PRESENCE:" + JSON.stringify(message))
+);
+XMPP.on("error", message => console.log("ERROR:" + message));
+XMPP.on("loginError", message => console.log("LOGIN ERROR:" + message));
+XMPP.on("login", message => console.log("LOGGED!"));
+XMPP.on("connect", message => console.log("CONNECTED!"));
+XMPP.on("disconnect", message => console.log("DISCONNECTED!"));
 
 // trustHosts (ignore self-signed SSL issues)
 // Warning: Do not use this in production (security will be compromised).
-XMPP.trustHosts(['chat.google.com']);
+XMPP.trustHosts(["chat.google.com"]);
 
 // connect
-XMPP.connect(MYJID, MYPASSWORD);
+XMPP.connect(
+  MYJID,
+  MYPASSWORD
+);
 
 // send message
-XMPP.message('Hello world!', TOJID);
+XMPP.message("Hello world!", TOJID);
 
 // join room(s)
-XMPP.joinRoom(ROOMJID_1, ROOMNICKNAME)
-XMPP.joinRoom(ROOMJID_2, ROOMNICKNAME)
+XMPP.joinRoom(ROOMJID_1, ROOMNICKNAME);
+XMPP.joinRoom(ROOMJID_2, ROOMNICKNAME);
 
 // send message to room(s)
-XMPP.sendRoomMessage(ROOMJID_1, 'Hello room 1!');
-XMPP.sendRoomMessage(ROOMJID_2, 'Hello room 2!');
+XMPP.sendRoomMessage(ROOMJID_1, "Hello room 1!");
+XMPP.sendRoomMessage(ROOMJID_2, "Hello room 2!");
 
 // leave room(s)
 XMPP.leaveRoom(ROOMJID_1);
@@ -63,21 +70,21 @@ XMPP.removeListener(TYPE);
 
 ### iOS
 
-Please use CocoaPods 
+Please use CocoaPods
 
 2. Install latest XMPPFramework:
-https://github.com/robbiehanson/XMPPFramework
-`pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'`
+   https://github.com/robbiehanson/XMPPFramework
+   `pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'`
 
 3. Add this package pod:
-`pod 'RNXMPP', :path => '../node_modules/react-native-xmpp'`
+   `pod 'RNXMPP', :path => '../node_modules/react-native-xmpp'`
 
 If you have problems with latest 4.0 XMPPFramework and/or XCode 9.3, you may use old one with forked KissXML:
 `pod 'XMPPFramework', '~> 3.7.0'`
 `pod 'KissXML', :git => "https://github.com/aksonov/KissXML.git", :branch => '5.1.4'`
 
-
 ### Android
+
 `react-native link react-native-xmpp`
 
 If it doesn't link the react-native-xmpp correct:
@@ -103,7 +110,7 @@ dependencies {
 On top, where imports are:
 
 ```java
-import rnxmpp.RNXMPPPackage;
+import com.rnxmpp.RNXMPPPackage;
 ```
 
 Add the `ReactVideoPackage` class to your list of exported packages.

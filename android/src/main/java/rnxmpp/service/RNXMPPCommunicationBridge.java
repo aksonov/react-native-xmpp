@@ -1,4 +1,4 @@
-package rnxmpp.service;
+package com.rnxmpp.service;
 
 import android.support.annotation.Nullable;
 
@@ -15,7 +15,7 @@ import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterEntry;
 import org.jivesoftware.smack.roster.RosterGroup;
 
-import rnxmpp.utils.Parser;
+import com.rnxmpp.utils.Parser;
 
 
 

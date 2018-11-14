@@ -2,7 +2,7 @@
  * Copyright (c) 2016. Teletronics. All rights reserved
  */
 
-package rnxmpp.utils;
+package com.rnxmpp.utils;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;

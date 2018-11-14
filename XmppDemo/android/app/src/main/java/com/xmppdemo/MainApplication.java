@@ -12,7 +12,7 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
-import rnxmpp.RNXMPPPackage;
+import com.rnxmpp.RNXMPPPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

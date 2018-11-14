@@ -1,4 +1,4 @@
-package rnxmpp.service;
+package com.rnxmpp.service;
 
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.MessageListener;
