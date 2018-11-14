@@ -32,13 +32,13 @@ repositories {
 
 dependencies {
     compile "com.facebook.react:react-native:+"
-    compile "org.igniterealtime.smack:smack-android:4.1.0"
+    compile "org.igniterealtime.smack:smack-android:4.1.9"
     // Optional for XMPPTCPConnection
-    compile "org.igniterealtime.smack:smack-tcp:4.1.0"
+    compile "org.igniterealtime.smack:smack-tcp:4.1.9"
     // Optional for XMPP-IM (RFC 6121) support (Roster, Threaded Chats, …)
-    compile "org.igniterealtime.smack:smack-im:4.1.0"
+    compile "org.igniterealtime.smack:smack-im:4.1.9"
     // Optional for XMPP extensions support
-    compile "org.igniterealtime.smack:smack-extensions:4.1.0"
+    compile "org.igniterealtime.smack:smack-extensions:4.1.9"
     // Support SCRAM-SHA-1
-    compile "org.igniterealtime.smack:smack-sasl-provided:4.1.0"
+    compile "org.igniterealtime.smack:smack-sasl-provided:4.1.9"
 }

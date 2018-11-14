@@ -1,4 +1,4 @@
-package rnxmpp.service;
+package com.rnxmpp.service;
 
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
@@ -17,6 +17,15 @@ public interface XmppService {
     void connect(String jid, String password, String authMethod, String hostname, Integer port);
 
     @ReactMethod
+    void joinRoom(String mucJid, String userNickname);
+
+    @ReactMethod
+    void sendRoomMessage(String roomJid, String text);
+
+    @ReactMethod
+    void leaveRoom(String mucJid);
+
+    @ReactMethod
     void message(String text, String to, String thread);
 
     @ReactMethod
@@ -33,4 +42,6 @@ public interface XmppService {
 
     @ReactMethod
     void sendStanza(String stanza);
+
+
 }

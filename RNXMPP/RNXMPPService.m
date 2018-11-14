@@ -5,6 +5,8 @@
 #import "XMPPLogging.h"
 #import "XMPPReconnect.h"
 #import "XMPPUser.h"
+#import "XMPPRoom.h"
+#import "XMPPRoomMemoryStorage.h"
 #import <CocoaLumberjack/DDLog.h>
 #import "DDTTYLogger.h"
 #import <CFNetwork/CFNetwork.h>
@@ -36,6 +38,8 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 
 @synthesize xmppStream;
 @synthesize xmppReconnect;
+@synthesize xmppRoom;
+@synthesize xmppRooms;
 
 +(RNXMPPService *) sharedInstance {
     static RNXMPPService *sharedInstance = nil;
@@ -190,6 +194,9 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 
     // You may need to alter these settings depending on the server you're connecting to
     customCertEvaluation = YES;
+    
+    // init xmppRooms dict
+    xmppRooms = [NSMutableDictionary dictionary];
 }
 
 - (void)teardownStream
@@ -263,6 +270,8 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
     if (myJID == nil || myPassword == nil) {
         return NO;
     }
+    
+    NSLog(@"Connect using JID %@", myJID);
 
     [xmppStream setMyJID:[XMPPJID jidWithString:myJID]];
     username = myJID;
@@ -589,6 +598,33 @@ static DDLogLevel ddLogLevel = DDLogLevelInfo;
 
 -(void)fetchRoster {
     [xmppRoster fetchRoster];
+}
+
+-(void)joinRoom:(NSString *)roomJID nickName:(NSString *)nickname{
+        XMPPJID *ROOM_JID = [XMPPJID jidWithString:roomJID];
+        XMPPRoomMemoryStorage *roomMemoryStorage = [[XMPPRoomMemoryStorage alloc] init];
+        xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:roomMemoryStorage jid:ROOM_JID dispatchQueue:dispatch_get_main_queue()];
+        [xmppRooms setObject:xmppRoom forKey:roomJID];
+        NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
+        [history addAttributeWithName:@"maxstanzas" stringValue:@"0"];
+        [xmppRoom activate:xmppStream];
+        [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        [xmppRoom joinRoomUsingNickname:nickname history:history password:nil];
+    }
+
+- (void)sendRoomMessage:(NSString *)roomJID message:(NSString *)message{
+        if (!isXmppConnected){
+                [self.delegate onError:[NSError errorWithDomain:@"xmpp" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Server is not connected, please reconnect"}]];
+                return;
+            }
+        [[xmppRooms objectForKey:roomJID] sendMessageWithBody:message];
+    }
+
+-(void)leaveRoom:(NSString *)roomJID{
+    [[xmppRooms objectForKey:roomJID] leaveRoom];
+    [[xmppRooms objectForKey:roomJID] deactivate];
+    [[xmppRooms objectForKey:roomJID] removeDelegate:self];
+    [xmppRooms removeObjectForKey:roomJID];
 }
 
 @end
