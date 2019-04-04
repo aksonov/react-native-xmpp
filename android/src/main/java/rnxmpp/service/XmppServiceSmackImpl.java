@@ -64,19 +64,21 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
 
     @Override
     public void connect(String jid, String password, String authMethod, String hostname, Integer port) {
-        final String[] jidParts = jid.split("@");
-        String[] serviceNameParts = jidParts[1].split("/");
-        String serviceName = serviceNameParts[0];
+		
+		String[] jidResourceSplit = jid.split("/");
+		int atIndex = jidResourceSplit[0].lastIndexOf("@");
+		final String userName = jidResourceSplit[0].substring(0, atIndex).replaceAll("[@]", "\\\\40");
+		final String serviceName = jidResourceSplit[0].substring(atIndex+1);
 
         XMPPTCPConnectionConfiguration.Builder confBuilder = XMPPTCPConnectionConfiguration.builder()
                 .setServiceName(serviceName)
-                .setUsernameAndPassword(jidParts[0], password)
+                .setUsernameAndPassword(userName, password)
                 .setConnectTimeout(3000)
                 //.setDebuggerEnabled(true)
                 .setSecurityMode(ConnectionConfiguration.SecurityMode.required);
 
-        if (serviceNameParts.length>1){
-            confBuilder.setResource(serviceNameParts[1]);
+        if (jidResourceSplit.length>1){
+            confBuilder.setResource(jidResourceSplit[1]);
         } else {
             confBuilder.setResource(Long.toHexString(Double.doubleToLongBits(Math.random())));
         }
@@ -106,7 +108,7 @@ public class XmppServiceSmackImpl implements XmppService, ChatManagerListener, S
                 try {
                     connection.connect().login();
                 } catch (XMPPException | SmackException | IOException e) {
-                    logger.log(Level.SEVERE, "Could not login for user " + jidParts[0], e);
+                    logger.log(Level.SEVERE, "Could not login for user " + userName, e);
                     if (e instanceof SASLErrorException){
                         XmppServiceSmackImpl.this.xmppServiceListener.onLoginError(((SASLErrorException) e).getSASLFailure().toString());
                     }else{
